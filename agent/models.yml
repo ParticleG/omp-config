@@ -1,0 +1,145 @@
+# OMP Model & Provider Configuration
+# Migrated from opencode + oh-my-opencode-slim
+
+providers:
+  # Primary provider - Anthropic models via SciHub Antigravity
+  scihub-antigravity:
+    baseUrl: https://api.scihub.edu.kg/v1
+    apiKey: SCIHUB_ANTIGRAVITY_API_KEY
+    api: anthropic-messages
+    models:
+      - id: claude-opus-4-6
+        name: Claude Opus 4.6
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 12000
+      - id: claude-sonnet-4-6
+        name: Claude Sonnet 4.6
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 12000
+      - id: claude-haiku-4-5-20251001
+        name: Claude Haiku 4.5 (2025-10-01)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 12000
+
+  # LT Craft (Kiro) - Anthropic API format
+  ltcraft-kiro:
+    baseUrl: https://ai.ltcraft.cn/v1
+    apiKey: LTCRAFT_KIRO_API_KEY
+    api: anthropic-messages
+    models:
+      - id: claude-opus-4-6
+        name: Claude Opus 4.6 (Kiro)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: claude-opus-4-7
+        name: Claude Opus 4.7 (Kiro)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: claude-opus-4-7-thinking
+        name: Claude Opus 4.7 Thinking (Kiro)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: claude-sonnet-4-6
+        name: Claude Sonnet 4.6 (Kiro)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: claude-haiku-4-5
+        name: Claude Haiku 4.5 (Kiro)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: claude-haiku-4-5-20251001
+        name: Claude Haiku 4.5 2025-10-01 (Kiro)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+
+  # LT Craft (Kiro) - OpenAI API format
+  ltcraft-kiro-openai:
+    baseUrl: https://ai.ltcraft.cn/v1
+    apiKey: LTCRAFT_KIRO_API_KEY
+    api: openai-completions
+    models:
+      - id: gpt-5.3-codex
+        name: GPT 5.3 Codex (Kiro)
+        reasoning: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: gpt-5.3-codex-spark
+        name: GPT 5.3 Codex Spark (Kiro)
+        reasoning: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: gpt-5.4-mini
+        name: GPT 5.4 Mini (Kiro)
+        reasoning: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: gpt-5.5
+        name: GPT 5.5 (Kiro)
+        reasoning: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: minimax-m2.5
+        name: Minimax M2.5 (Kiro)
+        reasoning: false
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 16384
+
+  # Hajimi - OpenAI-compatible multi-model gateway
+  hajimi:
+    baseUrl: https://vip.aipro.love/v1
+    apiKey: HAJIMI_API_KEY
+    api: openai-completions
+    models:
+      - id: claude-opus-4-6
+        name: Claude Opus 4.6 (Hajimi)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: claude-sonnet-4-6
+        name: Claude Sonnet 4.6 (Hajimi)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: gpt-5.4
+        name: GPT 5.4 (Hajimi)
+        reasoning: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: gpt-5.5
+        name: GPT 5.5 (Hajimi)
+        reasoning: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 16384
+      - id: deepseek-v4-pro
+        name: DeepSeek V4 Pro (Hajimi)
+        reasoning: true
+        input: [text]
+        contextWindow: 128000
+        maxTokens: 16384

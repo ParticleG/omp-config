@@ -1,0 +1,27 @@
+modelRoles: 
+  default: scihub-antigravity/claude-opus-4-6
+  slow: scihub-antigravity/claude-opus-4-6
+  smol: scihub-antigravity/claude-sonnet-4-6
+  plan: scihub-antigravity/claude-opus-4-6
+  designer: scihub-antigravity/claude-sonnet-4-6
+  task: scihub-antigravity/claude-opus-4-6
+defaultThinkingLevel: high
+compaction: 
+  enabled: true
+  strategy: context-full
+task: 
+  eager: false
+  maxConcurrency: 32
+  maxRecursionDepth: 2
+web_search: 
+  enabled: true
+lsp: 
+  enabled: true
+  diagnosticsOnWrite: true
+astGrep: 
+  enabled: true
+astEdit: 
+  enabled: true
+todo: 
+  enabled: true
+  reminders: true

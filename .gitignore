@@ -1,0 +1,9 @@
+# omp local state
+/gpu_cache.json
+/agent/*.db
+/agent/*.db-shm
+/agent/*.db-wal
+/agent/sessions/
+/agent/terminal-sessions/
+/logs/
+/natives/
