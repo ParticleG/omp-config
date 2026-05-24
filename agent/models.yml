@@ -62,131 +62,7 @@ providers:
           extraBody:
             thinking:
               type: enabled
-  scihub-antigravity:
-    baseUrl: https://api.scihub.edu.kg/v1
-    apiKey: SCIHUB_ANTIGRAVITY_API_KEY
-    api: anthropic-messages
-    models:
-      - id: claude-opus-4-6
-        name: Claude Opus 4.6
-        reasoning: true
-        input: [text, image]
-        contextWindow: 200000
-        maxTokens: 16384
-        cost:
-          input: 20
-          output: 100
-          cacheRead: 2
-          cacheWrite: 25
-      - id: claude-sonnet-4-6
-        name: Claude Sonnet 4.6
-        reasoning: true
-        input: [text, image]
-        contextWindow: 200000
-        maxTokens: 16384
-        cost:
-          input: 12
-          output: 60
-          cacheRead: 1.2
-          cacheWrite: 15
-      - id: claude-haiku-4-5-20251001
-        name: Claude Haiku 4.5 (2025-10-01)
-        reasoning: true
-        input: [text, image]
-        contextWindow: 200000
-        maxTokens: 16384
-        cost:
-          input: 0
-          output: 0
-          cacheRead: 0
-          cacheWrite: 0
-  ltcraft-kiro-anthropic:
-    baseUrl: https://ai.ltcraft.cn/v1
-    apiKey: LTCRAFT_KIRO_API_KEY
-    api: anthropic-messages
-    models:
-      - id: claude-opus-4-6
-        name: Claude Opus 4.6
-        reasoning: true
-        input: [text, image]
-        contextWindow: 200000
-        maxTokens: 16384
-        cost:
-          input: 15
-          output: 75
-          cacheRead: 1.5
-          cacheWrite: 18.75
-      - id: claude-opus-4-7
-        name: Claude Opus 4.7
-        reasoning: true
-        input: [text, image]
-        contextWindow: 200000
-        maxTokens: 16384
-        cost:
-          input: 15
-          output: 75
-          cacheRead: 1.5
-          cacheWrite: 18.75
-      - id: claude-sonnet-4-6
-        name: Claude Sonnet 4.6
-        reasoning: true
-        input: [text, image]
-        contextWindow: 200000
-        maxTokens: 16384
-        cost:
-          input: 9
-          output: 45
-          cacheRead: 0.9
-          cacheWrite: 9
-      - id: claude-haiku-4-5
-        name: Claude Haiku 4.5
-        reasoning: true
-        input: [text, image]
-        contextWindow: 200000
-        maxTokens: 16384
-        cost:
-          input: 3
-          output: 15
-          cacheRead: 0.3
-          cacheWrite: 3
-  ltcraft-aws-anthropic:
-    baseUrl: https://ai.ltcraft.cn/v1
-    apiKey: LTCRAFT_AWS_API_KEY
-    api: anthropic-messages
-    models:
-      - id: claude-opus-4-6
-        name: Claude Opus 4.6
-        reasoning: true
-        input: [text, image]
-        contextWindow: 200000
-        maxTokens: 16384
-        cost:
-          input: 32.5
-          output: 162.5
-          cacheRead: 3.25
-          cacheWrite: 40.625
-      - id: claude-opus-4-7
-        name: Claude Opus 4.7
-        reasoning: true
-        input: [text, image]
-        contextWindow: 200000
-        maxTokens: 16384
-        cost:
-          input: 32.5
-          output: 162.5
-          cacheRead: 3.25
-          cacheWrite: 40.625
-      - id: claude-sonnet-4-6
-        name: Claude Sonnet 4.6
-        reasoning: true
-        input: [text, image]
-        contextWindow: 200000
-        maxTokens: 16384
-        cost:
-          input: 19.5
-          output: 97.5
-          cacheRead: 1.95
-          cacheWrite: 19.5
+
   hajimi:
     baseUrl: https://vip.aipro.love/v1
     apiKey: HAJIMI_API_KEY
@@ -198,6 +74,8 @@ providers:
         input: [text, image]
         contextWindow: 200000
         maxTokens: 16384
+        compat:
+          supportsReasoningEffort: true
         cost:
           input: 0
           output: 0
@@ -209,6 +87,8 @@ providers:
         input: [text, image]
         contextWindow: 200000
         maxTokens: 16384
+        compat:
+          supportsReasoningEffort: true
         cost:
           input: 0
           output: 0
@@ -220,6 +100,8 @@ providers:
         input: [text, image]
         contextWindow: 200000
         maxTokens: 16384
+        compat:
+          supportsReasoningEffort: true
         cost:
           input: 0
           output: 0
@@ -231,6 +113,9 @@ providers:
         input: [text]
         contextWindow: 200000
         maxTokens: 16384
+        compat:
+          supportsReasoningEffort: true
+          maxTokensField: max_completion_tokens
         cost:
           input: 0
           output: 0
@@ -242,6 +127,9 @@ providers:
         input: [text]
         contextWindow: 200000
         maxTokens: 16384
+        compat:
+          supportsReasoningEffort: true
+          maxTokensField: max_completion_tokens
         cost:
           input: 0
           output: 0
@@ -269,3 +157,191 @@ providers:
           output: 0
           cacheRead: 0
           cacheWrite: 0
+
+  ltcraft-aws-anthropic:
+    baseUrl: https://ai.ltcraft.cn/v1
+    apiKey: LTCRAFT_AWS_API_KEY
+    api: anthropic-messages
+    disableStrictTools: true
+    models:
+      - id: claude-opus-4-6
+        name: Claude Opus 4.6
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+        thinking:
+          mode: anthropic-adaptive
+          minLevel: minimal
+          maxLevel: xhigh
+        cost:
+          input: 32.5
+          output: 162.5
+          cacheRead: 3.25
+          cacheWrite: 40.625
+      - id: claude-opus-4-7
+        name: Claude Opus 4.7
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+        thinking:
+          mode: anthropic-adaptive
+          minLevel: minimal
+          maxLevel: xhigh
+        cost:
+          input: 32.5
+          output: 162.5
+          cacheRead: 3.25
+          cacheWrite: 40.625
+      - id: claude-sonnet-4-6
+        name: Claude Sonnet 4.6
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+        thinking:
+          mode: anthropic-adaptive
+          minLevel: minimal
+          maxLevel: high
+        cost:
+          input: 19.5
+          output: 97.5
+          cacheRead: 1.95
+          cacheWrite: 19.5
+
+  ltcraft-kiro-anthropic:
+    baseUrl: https://ai.ltcraft.cn/v1
+    apiKey: LTCRAFT_KIRO_API_KEY
+    api: anthropic-messages
+    disableStrictTools: true
+    models:
+      - id: claude-opus-4-6
+        name: Claude Opus 4.6
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+        thinking:
+          mode: anthropic-adaptive
+          minLevel: minimal
+          maxLevel: xhigh
+        cost:
+          input: 15
+          output: 75
+          cacheRead: 1.5
+          cacheWrite: 18.75
+      - id: claude-opus-4-7
+        name: Claude Opus 4.7
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+        thinking:
+          mode: anthropic-adaptive
+          minLevel: minimal
+          maxLevel: xhigh
+        cost:
+          input: 15
+          output: 75
+          cacheRead: 1.5
+          cacheWrite: 18.75
+      - id: claude-sonnet-4-6
+        name: Claude Sonnet 4.6
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+        thinking:
+          mode: anthropic-adaptive
+          minLevel: minimal
+          maxLevel: high
+        cost:
+          input: 9
+          output: 45
+          cacheRead: 0.9
+          cacheWrite: 9
+      - id: claude-haiku-4-5
+        name: Claude Haiku 4.5
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+        thinking:
+          mode: anthropic-adaptive
+          minLevel: minimal
+          maxLevel: high
+        cost:
+          input: 3
+          output: 15
+          cacheRead: 0.3
+          cacheWrite: 3
+
+  scihub-antigravity:
+    baseUrl: https://api.scihub.edu.kg/v1
+    apiKey: SCIHUB_ANTIGRAVITY_API_KEY
+    api: anthropic-messages
+    disableStrictTools: true
+    models:
+      - id: claude-opus-4-6
+        name: Claude Opus 4.6
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+        thinking:
+          mode: anthropic-adaptive
+          minLevel: minimal
+          maxLevel: xhigh
+        cost:
+          input: 20
+          output: 100
+          cacheRead: 2
+          cacheWrite: 25
+      - id: claude-sonnet-4-6
+        name: Claude Sonnet 4.6
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+        thinking:
+          mode: anthropic-adaptive
+          minLevel: minimal
+          maxLevel: high
+        cost:
+          input: 12
+          output: 60
+          cacheRead: 1.2
+          cacheWrite: 15
+      - id: claude-haiku-4-5-20251001
+        name: Claude Haiku 4.5 (2025-10-01)
+        reasoning: true
+        input: [text, image]
+        contextWindow: 200000
+        maxTokens: 16384
+        thinking:
+          mode: anthropic-adaptive
+          minLevel: minimal
+          maxLevel: high
+        cost:
+          input: 0
+          output: 0
+          cacheRead: 0
+          cacheWrite: 0
+
+# Canonical model equivalence
+equivalence:
+  overrides:
+    hajimi/claude-opus-4-6: claude-opus-4-6
+    hajimi/claude-opus-4-7: claude-opus-4-7
+    hajimi/claude-sonnet-4-6: claude-sonnet-4-6
+    ltcraft-aws-anthropic/claude-opus-4-6: claude-opus-4-6
+    ltcraft-aws-anthropic/claude-opus-4-7: claude-opus-4-7
+    ltcraft-aws-anthropic/claude-sonnet-4-6: claude-sonnet-4-6
+    ltcraft-kiro-anthropic/claude-haiku-4-5: claude-haiku-4-5
+    ltcraft-kiro-anthropic/claude-opus-4-6: claude-opus-4-6
+    ltcraft-kiro-anthropic/claude-opus-4-7: claude-opus-4-7
+    ltcraft-kiro-anthropic/claude-sonnet-4-6: claude-sonnet-4-6
+    scihub-antigravity/claude-opus-4-6: claude-opus-4-6
+    scihub-antigravity/claude-sonnet-4-6: claude-sonnet-4-6
+    scihub-antigravity/claude-haiku-4-5-20251001: claude-haiku-4-5
