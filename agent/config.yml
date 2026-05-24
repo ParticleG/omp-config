@@ -25,3 +25,9 @@ astEdit:
 todo: 
   enabled: true
   reminders: true
+modelProviderOrder: 
+  - scihub-antigravity
+  - ltcraft-kiro-anthropic
+  - ltcraft-aws-anthropic
+  - hajimi
+  - deepseek
