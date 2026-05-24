@@ -1,10 +1,10 @@
 modelRoles: 
-  default: scihub-antigravity/claude-opus-4-6
-  slow: scihub-antigravity/claude-opus-4-6
+  default: claude-opus-4-6
+  slow: claude-opus-4-6
   smol: deepseek/deepseek-v4-pro
-  plan: scihub-antigravity/claude-opus-4-6
-  designer: scihub-antigravity/claude-sonnet-4-6
-  task: scihub-antigravity/claude-opus-4-6
+  plan: claude-opus-4-6
+  designer: claude-sonnet-4-6
+  task: claude-opus-4-6
 defaultThinkingLevel: high
 compaction: 
   enabled: true
@@ -31,3 +31,13 @@ modelProviderOrder:
   - ltcraft-aws-anthropic
   - hajimi
   - deepseek
+theme: 
+  dark: dark-one
+  light: light-one
+symbolPreset: unicode
+statusLine: 
+  preset: nerd
+  separator: powerline-thin
+display: 
+  shimmer: classic
+  showTokenUsage: true
