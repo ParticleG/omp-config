@@ -1,6 +1,8 @@
 ---
 name: fixer
 description: "Fast execution specialist for well-defined, bounded implementation tasks — tests, multi-file edits, mechanical updates"
+spawns:
+  - explore
 model:
   - pi/smol
 thinkingLevel: low

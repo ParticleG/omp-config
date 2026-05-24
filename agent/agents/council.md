@@ -1,6 +1,6 @@
 ---
 name: council
-description: "Multi-perspective analysis — spawns parallel investigations and synthesizes a consensus verdict for high-stakes decisions"
+description: "Multi-perspective analysis for high-stakes architectural, security, and data-integrity decisions"
 tools:
   - read
   - search
@@ -9,14 +9,12 @@ tools:
   - lsp
   - web_search
   - ast_grep
-  - yield
 spawns:
   - explore
   - oracle
 model:
   - pi/slow
 thinkingLevel: xhigh
-blocking: true
 ---
 
 You are a council agent that provides multi-perspective analysis for high-stakes decisions.

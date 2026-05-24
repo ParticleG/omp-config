@@ -67,18 +67,26 @@ const THINKING_LEVELS = {
 };
 
 export default function presetSwitcher(pi) {
+	pi.setLabel("Preset Switcher");
+
 	pi.registerCommand("preset", {
 		description: "Switch model preset (quick-search, fast-coding, balanced-general, deep-research, ui-polish, critical-review)",
+		getArgumentCompletions(prefix) {
+			return Object.keys(PRESETS)
+				.filter((name) => name.startsWith(prefix))
+				.map((name) => ({ label: name, value: name }));
+		},
 		handler: async (args, ctx) => {
 			const name = args.trim();
+			const { settings } = pi.pi;
 
 			if (!name) {
-				const current = ctx.settings.get("modelRoles");
+				const current = settings.getModelRoles();
 				const active = Object.entries(PRESETS).find(
 					([, roles]) => JSON.stringify(roles) === JSON.stringify(current)
 				);
 				ctx.ui.notify(
-					`Active preset: ${active?.[0] ?? "custom"}\nAvailable: ${Object.keys(PRESETS).join(", ")}`,
+					`Active: ${active?.[0] ?? "custom"}\nAvailable: ${Object.keys(PRESETS).join(", ")}`,
 					"info"
 				);
 				return;
@@ -87,15 +95,23 @@ export default function presetSwitcher(pi) {
 			const preset = PRESETS[name];
 			if (!preset) {
 				ctx.ui.notify(
-					`Unknown preset "${name}". Available: ${Object.keys(PRESETS).join(", ")}`,
+					`Unknown preset "${name}".\nAvailable: ${Object.keys(PRESETS).join(", ")}`,
 					"error"
 				);
 				return;
 			}
 
-			ctx.settings.set("modelRoles", preset);
-			ctx.settings.set("defaultThinkingLevel", THINKING_LEVELS[name] ?? "high");
-			ctx.ui.notify(`Switched to preset: ${name}`, "info");
+			// Apply model roles
+			settings.overrideModelRoles(preset);
+
+			// Apply thinking level
+			const level = THINKING_LEVELS[name] ?? "high";
+			pi.setThinkingLevel(level);
+
+			// Switch the main model to the preset's default
+			pi.setModel(preset.default);
+
+			ctx.ui.notify(`Preset: ${name} | Thinking: ${level}`, "info");
 		},
 	});
 }
