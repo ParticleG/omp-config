@@ -1,4 +1,5 @@
-modelRoles: 
+lastChangelogVersion: 15.5.7
+modelRoles:
   default: claude-opus-4-6
   slow: claude-opus-4-6
   smol: deepseek/deepseek-v4-pro
@@ -6,38 +7,36 @@ modelRoles:
   designer: claude-sonnet-4-6
   task: claude-opus-4-6
 defaultThinkingLevel: high
-compaction: 
+compaction:
   enabled: true
   strategy: context-full
-task: 
+task:
   eager: false
   maxConcurrency: 32
   maxRecursionDepth: 2
-web_search: 
+web_search:
   enabled: true
-lsp: 
+lsp:
   enabled: true
   diagnosticsOnWrite: true
-astGrep: 
+astGrep:
   enabled: true
-astEdit: 
+astEdit:
   enabled: true
-todo: 
+todo:
   enabled: true
   reminders: true
-modelProviderOrder: 
-  - scihub-antigravity
-  - ltcraft-aws-anthropic
+modelProviderOrder:
   - ltcraft-kiro-anthropic
   - deepseek
   - hajimi
-theme: 
+theme:
   dark: dark-one
   light: light-one
 symbolPreset: unicode
-statusLine: 
+statusLine:
   preset: nerd
   separator: powerline-thin
-display: 
+display:
   shimmer: classic
   showTokenUsage: true
