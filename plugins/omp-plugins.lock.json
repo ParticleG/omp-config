@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "omp-plugin-llm-fingerprint": {
+      "version": "1.0.0",
+      "enabledFeatures": null,
+      "enabled": true
+    }
+  },
+  "settings": {}
+}
