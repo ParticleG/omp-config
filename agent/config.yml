@@ -27,6 +27,7 @@ todo:
   enabled: true
   reminders: true
 modelProviderOrder: 
+  - ltcraft-aws-anthropic
   - ltcraft-kiro-anthropic
   - deepseek
   - hajimi
@@ -40,3 +41,6 @@ statusLine:
 display: 
   shimmer: classic
   showTokenUsage: true
+autoResume: false
+startup: 
+  checkUpdate: false
