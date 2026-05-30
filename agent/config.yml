@@ -1,11 +1,12 @@
 lastChangelogVersion: 15.5.8
 modelRoles: 
-  default: claude-opus-4-6
-  slow: claude-opus-4-6
-  smol: deepseek/deepseek-v4-pro
-  plan: claude-opus-4-6
-  designer: claude-sonnet-4-6
-  task: claude-opus-4-6
+  default: deepseek/deepseek-v4-pro:high
+  slow: deepseek/deepseek-v4-pro:xhigh
+  smol: deepseek/deepseek-v4-flash:high
+  plan: deepseek/deepseek-v4-pro:xhigh
+  designer: deepseek/deepseek-v4-flash:xhigh
+  task: deepseek/deepseek-v4-pro:high
+  commit: deepseek/deepseek-v4-flash:high
 defaultThinkingLevel: high
 compaction: 
   enabled: true

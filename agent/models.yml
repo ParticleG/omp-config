@@ -159,7 +159,7 @@ providers:
           cacheWrite: 0
 
   ltcraft-aws-anthropic:
-    baseUrl: https://ai.ltcraft.cn/v1
+    baseUrl: https://ai.lt4net.org/v1
     apiKey: LTCRAFT_AWS_API_KEY
     api: anthropic-messages
     disableStrictTools: true
@@ -226,7 +226,7 @@ providers:
           cacheWrite: 19.5
 
   ltcraft-kiro-anthropic:
-    baseUrl: https://ai.ltcraft.cn/v1
+    baseUrl: https://ai.lt4net.org/v1
     apiKey: LTCRAFT_KIRO_API_KEY
     api: anthropic-messages
     disableStrictTools: true
