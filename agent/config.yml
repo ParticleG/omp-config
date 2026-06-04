@@ -1,6 +1,6 @@
 lastChangelogVersion: 15.5.8
 modelRoles: 
-  default: openai-codex/gpt-5.5:xhigh
+  default: openai-codex/gpt-5.5:high
   slow: openai-codex/gpt-5.5:xhigh
   smol: deepseek/deepseek-v4-pro
   plan: openai-codex/gpt-5.5:xhigh
@@ -34,8 +34,8 @@ modelProviderOrder:
   - deepseek
   - hajimi
 theme: 
-  dark: dark-one
-  light: light-one
+  dark: titanium
+  light: light
 symbolPreset: unicode
 statusLine: 
   preset: nerd
@@ -46,3 +46,4 @@ display:
 autoResume: false
 startup: 
   checkUpdate: false
+setupVersion: 1
