@@ -292,6 +292,15 @@ providers:
           cacheRead: 0.3
           cacheWrite: 3
 
+  openai:
+    baseUrl: http://127.0.0.1:8317/v1
+    auth: apiKey
+    apiKey: LOCAL_API_KEY
+    modelOverrides:
+      gpt-5.5:
+        contextWindow: 272000
+        maxTokens: 128000
+
 # Canonical model equivalence
 equivalence:
   overrides:

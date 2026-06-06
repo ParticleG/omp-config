@@ -1,13 +1,13 @@
 lastChangelogVersion: 15.5.8
 modelRoles: 
-  default: openai-codex/gpt-5.5:high
-  slow: openai-codex/gpt-5.5:xhigh
-  smol: deepseek/deepseek-v4-pro
-  plan: openai-codex/gpt-5.5:xhigh
-  designer: openai-codex/gpt-5.5:high
-  task: deepseek/deepseek-v4-pro:xhigh
-  vision: openai-codex/gpt-5.5:xhigh
-  commit: deepseek/deepseek-v4-pro:high
+  default: gpt-5.5:high
+  slow: gpt-5.5:xhigh
+  smol: deepseek-v4-pro
+  plan: gpt-5.5:xhigh
+  designer: gpt-5.5:high
+  task: deepseek-v4-pro:xhigh
+  vision: gpt-5.5:xhigh
+  commit: deepseek-v4-pro:high
 defaultThinkingLevel: high
 compaction: 
   enabled: true
@@ -29,6 +29,7 @@ todo:
   enabled: true
   reminders: true
 modelProviderOrder: 
+  - openai
   - ltcraft-aws-anthropic
   - ltcraft-kiro-anthropic
   - deepseek
