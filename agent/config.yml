@@ -8,7 +8,7 @@ modelRoles:
   task: deepseek-v4-pro:xhigh
   vision: gpt-5.5:xhigh
   commit: deepseek-v4-pro:high
-defaultThinkingLevel: high
+defaultThinkingLevel: xhigh
 compaction: 
   enabled: true
   strategy: context-full
@@ -30,6 +30,7 @@ todo:
   reminders: true
 modelProviderOrder: 
   - openai
+  - openai-codex
   - ltcraft-aws-anthropic
   - ltcraft-kiro-anthropic
   - deepseek
@@ -48,3 +49,15 @@ autoResume: false
 startup: 
   checkUpdate: false
 setupVersion: 1
+stt: 
+  modelName: large
+memory: 
+  backend: mnemopi
+inspect_image: 
+  enabled: true
+checkpoint: 
+  enabled: true
+github: 
+  enabled: true
+providers: 
+  webSearch: auto
