@@ -293,9 +293,9 @@ providers:
           cacheWrite: 3
 
   openai:
-    baseUrl: http://127.0.0.1:8317/v1
+    baseUrl: https://cpa.studio26f.org/v1
     auth: apiKey
-    apiKey: LOCAL_API_KEY
+    apiKey: STUDIO26F_API_KEY
     modelOverrides:
       gpt-5.5:
         contextWindow: 272000

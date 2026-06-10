@@ -4,6 +4,7 @@
 /agent/*.db-shm
 /agent/*.db-wal
 /agent/blobs/
+/agent/memories/
 /agent/sessions/
 /agent/terminal-sessions/
 /logs/
