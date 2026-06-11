@@ -61,3 +61,5 @@ github:
   enabled: true
 providers: 
   webSearch: auto
+contextPromotion: 
+  enabled: false
