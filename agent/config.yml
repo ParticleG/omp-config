@@ -1,6 +1,6 @@
 lastChangelogVersion: 15.5.8
 modelRoles: 
-  default: gpt-5.5:high
+  default: gpt-5.5:xhigh
   slow: gpt-5.5:xhigh
   smol: deepseek-v4-pro
   plan: gpt-5.5:xhigh
