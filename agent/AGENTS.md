@@ -6,12 +6,13 @@
 
 # 需要 sudo 密码的命令
 
-在 Oh My Pi 中执行需要交互式密码输入的命令时，必须使用支持 TTY 的交互模式：
+在 Oh My Pi 交互式 UI 中执行可能读取密码或确认输入的命令时，必须使用支持 TTY 的 Bash PTY 模式，让系统程序直接在终端中提示用户输入。
 
-1. 需要 `sudo`、`su`、`ssh` 等读取密码/确认输入时，调用 Bash 工具必须设置 `pty: true`
-2. 不要在非交互式 Bash 中反复重试 `sudo`；看到 “需要一个终端 / a terminal is required / 读取密码需要一个终端” 后，立即改用 `pty: true`
-3. 长命令前先用交互式 `sudo -v` 刷新凭据，再执行后续命令
-4. 不要把密码写入命令、环境变量、管道或文件；让用户在 TTY 中自行输入
+1. 需要 `sudo`、`su`、`ssh` 等从终端读取密码/确认输入时，调用 Bash 工具必须设置 `pty: true`
+2. 不要在非交互式 Bash 中反复重试这类命令；看到 `a terminal is required`、`no tty present`、`read_passphrase`、`需要一个终端` 等错误后，立即改用 `pty: true`
+3. 如果 `pty: true` 仍提示 PTY 不可用，说明当前会话没有交互式 UI；停止并说明需要在交互式 OMP/本地终端中执行，不要改为让用户在聊天、ask/input、环境变量、管道或文件里提供密码
+4. 不要使用 `sudo -S`；不要把密码写入命令、环境变量、管道、临时文件、日志或配置；让用户只在 TTY 或系统认证界面中输入
+5. 多个 `sudo` 命令需要复用凭据时，可以在同一个 `pty: true` Bash 调用内先运行 `sudo -v` 再运行后续命令；不要假设一次 `sudo -v` 能让不同 PTY 或非 PTY 的后续 Bash 调用复用凭据
 
 # 代码风格
 
