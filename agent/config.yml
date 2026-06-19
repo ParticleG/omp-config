@@ -15,6 +15,7 @@ task:
   eager: default
   maxConcurrency: 32
   maxRecursionDepth: 2
+  showResolvedModelBadge: true
 web_search: 
   enabled: true
 lsp: 
@@ -37,10 +38,11 @@ modelProviderOrder:
 theme: 
   dark: titanium
   light: light
-symbolPreset: unicode
+symbolPreset: nerd
 statusLine: 
   preset: nerd
   separator: powerline-thin
+  transparent: true
 display: 
   shimmer: classic
   showTokenUsage: true
