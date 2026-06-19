@@ -1,19 +1,18 @@
-lastChangelogVersion: 15.5.8
 modelRoles: 
   default: gpt-5.5:xhigh
   slow: gpt-5.5:xhigh
-  smol: deepseek-v4-pro
+  smol: openai/gpt-5.5:high
   plan: gpt-5.5:xhigh
-  designer: gpt-5.5:high
-  task: deepseek-v4-pro:xhigh
+  designer: openai/gpt-5.5:xhigh
+  task: openai/gpt-5.5:xhigh
   vision: gpt-5.5:xhigh
-  commit: deepseek-v4-pro:high
+  commit: openai/gpt-5.5:high
 defaultThinkingLevel: xhigh
 compaction: 
   enabled: true
   strategy: context-full
 task: 
-  eager: false
+  eager: default
   maxConcurrency: 32
   maxRecursionDepth: 2
 web_search: 
@@ -60,6 +59,8 @@ checkpoint:
 github: 
   enabled: true
 providers: 
-  webSearch: auto
+  webSearch: codex
+  image: openai
+  openaiWebsockets: "off"
 contextPromotion: 
   enabled: false
