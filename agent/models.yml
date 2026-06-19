@@ -301,6 +301,15 @@ providers:
         contextWindow: 272000
         maxTokens: 128000
 
+  openai-codex:
+    baseUrl: https://cpa.studio26f.org/v1
+    auth: apiKey
+    apiKey: STUDIO26F_API_KEY
+    modelOverrides:
+      gpt-5.5:
+        contextWindow: 272000
+        maxTokens: 128000
+
 # Canonical model equivalence
 equivalence:
   overrides:
