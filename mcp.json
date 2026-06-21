@@ -1,6 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/can1357/oh-my-pi/main/packages/coding-agent/src/config/mcp-schema.json",
   "mcpServers": {
+    "blender": {
+      "command": "uvx",
+      "args": ["--python", "3.11", "blender-mcp"],
+      "env": { "UV_PYTHON_PREFERENCE": "only-managed" }
+    },
     "ida-pro-mcp": {
       "type": "http",
       "url": "http://127.0.0.1:13337/mcp"

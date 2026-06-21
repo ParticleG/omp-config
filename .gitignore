@@ -9,6 +9,7 @@
 /agent/sessions/
 /agent/terminal-sessions/
 /agent/webcache/
+/cache/
 /logs/
 /natives/
 /puppeteer/chrome/
