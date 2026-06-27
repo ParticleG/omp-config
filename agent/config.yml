@@ -7,6 +7,7 @@ modelRoles:
   task: openai/gpt-5.5:xhigh
   vision: gpt-5.5:xhigh
   commit: openai/gpt-5.5:high
+  advisor: openai/gpt-5.5:xhigh
 defaultThinkingLevel: xhigh
 compaction: 
   enabled: true
@@ -61,8 +62,11 @@ checkpoint:
 github: 
   enabled: true
 providers: 
-  webSearch: codex
-  image: openai
-  openaiWebsockets: "off"
+  webSearch: auto
+  image: auto
+  openaiWebsockets: auto
+  fetch: auto
 contextPromotion: 
   enabled: false
+exa: 
+  enableResearcher: true
