@@ -7,6 +7,7 @@
 /agent/blobs/
 /agent/memories/
 /agent/sessions/
+/agent/skills/easyeda-api/node_modules/
 /agent/terminal-sessions/
 /agent/webcache/
 /cache/
