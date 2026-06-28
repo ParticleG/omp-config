@@ -1,13 +1,13 @@
 modelRoles: 
   default: gpt-5.5:xhigh
   slow: gpt-5.5:xhigh
-  smol: openai/gpt-5.5:high
+  smol: gpt-5.4:xhigh
   plan: gpt-5.5:xhigh
-  designer: openai/gpt-5.5:xhigh
-  task: openai/gpt-5.5:xhigh
+  designer: gpt-5.5:xhigh
+  task: gpt-5.5:high
   vision: gpt-5.5:xhigh
-  commit: openai/gpt-5.5:high
-  advisor: openai/gpt-5.5:xhigh
+  commit: gpt-5.5:high
+  advisor: gpt-5.5:xhigh
 defaultThinkingLevel: xhigh
 compaction: 
   enabled: true
