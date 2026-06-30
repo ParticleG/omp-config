@@ -31,7 +31,6 @@ todo:
   reminders: true
 modelProviderOrder: 
   - openai
-  - openai-codex
   - ltcraft-aws-anthropic
   - ltcraft-kiro-anthropic
   - deepseek
