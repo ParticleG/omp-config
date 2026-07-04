@@ -14,3 +14,6 @@
 /logs/
 /natives/
 /puppeteer/chrome/
+/stats.db
+/stats.db-shm
+/stats.db-wal
