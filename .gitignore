@@ -13,6 +13,7 @@
 /cache/
 /logs/
 /natives/
+/node_modules/
 /puppeteer/chrome/
 /stats.db
 /stats.db-shm

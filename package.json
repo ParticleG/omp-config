@@ -1,0 +1,13 @@
+{
+  "name": "omp-config",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@oh-my-pi/pi-coding-agent": "^16.3.11",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^6"
+  },
+  "dependencies": {}
+}
