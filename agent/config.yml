@@ -13,10 +13,13 @@ compaction:
   enabled: true
   strategy: context-full
 task: 
-  eager: default
+  eager: preferred
   maxConcurrency: 32
   maxRecursionDepth: 2
   showResolvedModelBadge: true
+  enableLsp: true
+  softRequestBudget: 150
+  softRequestBudgetNotice: true
 web_search: 
   enabled: true
 lsp: 
@@ -28,7 +31,9 @@ astEdit:
   enabled: true
 todo: 
   enabled: true
-  reminders: true
+  reminders: 
+    max: 5
+  eager: default
 modelProviderOrder: 
   - openai
   - ltcraft-aws-anthropic
@@ -69,3 +74,13 @@ contextPromotion:
   enabled: false
 exa: 
   enableResearcher: true
+advisor: 
+  enabled: true
+  syncBacklog: "1"
+  subagents: false
+marketplace: 
+  autoUpdate: notify
+features: 
+  unexpectedStopDetection: true
+bashInterceptor: 
+  enabled: true
