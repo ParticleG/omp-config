@@ -292,14 +292,11 @@ providers:
           cacheRead: 0.3
           cacheWrite: 3
 
-  openai:
-    baseUrl: https://cpa.studio26f.org/v1
+  openai-codex:
+    baseUrl: https://cpa.xn--dtra.com/backend-api
     auth: apiKey
     apiKey: STUDIO26F_API_KEY
-    modelOverrides:
-      gpt-5.5:
-        contextWindow: 272000
-        maxTokens: 128000
+    authHeader: true
 
 # Canonical model equivalence
 equivalence:
