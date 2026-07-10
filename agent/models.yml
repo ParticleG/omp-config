@@ -296,7 +296,6 @@ providers:
     baseUrl: https://cpa.xn--dtra.com/backend-api
     auth: apiKey
     apiKey: STUDIO26F_API_KEY
-    authHeader: true
 
 # Canonical model equivalence
 equivalence:
