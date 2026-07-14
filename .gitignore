@@ -13,7 +13,7 @@
 /logs/
 /natives/
 /node_modules/
-/plugins/cache/marketplaces/**
+/plugins/cache/marketplaces/
 /puppeteer/chrome/
 /autoqa.db
 /gpu_cache.json
