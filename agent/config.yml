@@ -1,12 +1,12 @@
 modelRoles: 
   default: gpt-5.6-sol:xhigh
   slow: gpt-5.6-sol:xhigh
-  smol: gpt-5.6-luna:high
+  smol: gpt-5.6-sol:low
   plan: gpt-5.6-sol:xhigh
   designer: gpt-5.6-sol:xhigh
-  task: gpt-5.6-terra:high
+  task: gpt-5.6-sol:high
   vision: gpt-5.6-sol:xhigh
-  commit: gpt-5.6-terra:high
+  commit: gpt-5.6-sol:medium
   advisor: gpt-5.6-sol:xhigh
 defaultThinkingLevel: xhigh
 compaction: 
@@ -85,3 +85,6 @@ features:
   unexpectedStopDetection: true
 bashInterceptor: 
   enabled: true
+dev: 
+  autoqa: 
+    consent: granted

@@ -1,5 +1,4 @@
 # omp local state
-/gpu_cache.json
 /agent/*.db
 /agent/*.db-shm
 /agent/*.db-wal
@@ -15,6 +14,9 @@
 /natives/
 /node_modules/
 /puppeteer/chrome/
+/autoqa.db
+/gpu_cache.json
+/install-id
 /stats.db
 /stats.db-shm
 /stats.db-wal
