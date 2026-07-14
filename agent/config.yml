@@ -1,14 +1,14 @@
 modelRoles: 
   default: gpt-5.6-sol:xhigh
-  slow: gpt-5.6-sol:xhigh
-  smol: gpt-5.6-sol:low
-  plan: gpt-5.6-sol:xhigh
-  designer: gpt-5.6-sol:xhigh
-  task: gpt-5.6-sol:high
-  vision: gpt-5.6-sol:xhigh
+  slow: gpt-5.6-sol:max
+  smol: gpt-5.6-sol:medium
+  plan: gpt-5.6-sol:max
+  designer: gpt-5.6-sol:max
+  task: gpt-5.6-sol:xhigh
+  vision: gpt-5.6-sol:max
   commit: gpt-5.6-sol:medium
-  advisor: gpt-5.6-sol:xhigh
-defaultThinkingLevel: xhigh
+  advisor: gpt-5.6-sol:max
+defaultThinkingLevel: max
 compaction: 
   enabled: true
   strategy: context-full
