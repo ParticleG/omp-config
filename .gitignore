@@ -15,9 +15,9 @@
 /node_modules/
 /plugins/cache/marketplaces/
 /puppeteer/chrome/
-/autoqa.db
+/run/daemons/
+/*.db
+/*.db-shm
+/*.db-wal
 /gpu_cache.json
 /install-id
-/stats.db
-/stats.db-shm
-/stats.db-wal
