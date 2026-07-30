@@ -32,9 +32,8 @@ astEdit:
   enabled: true
 todo: 
   enabled: true
-  reminders: 
-    max: 5
   eager: default
+  remindersMax: 5
 modelProviderOrder: 
   - openai-codex
   - ltcraft-aws-anthropic
@@ -67,10 +66,32 @@ checkpoint:
 github: 
   enabled: true
 providers: 
-  webSearch: exa
-  image: auto
   openaiWebsockets: auto
   fetch: auto
+  webSearchOrder: 
+    - exa
+    - perplexity
+    - gemini
+    - anthropic
+    - codex
+    - xai
+    - zai
+    - tinyfish
+    - jina
+    - kagi
+    - tavily
+    - firecrawl
+    - brave
+    - kimi
+    - parallel
+    - synthetic
+    - searxng
+    - startpage
+    - duckduckgo
+    - ecosia
+    - google
+    - mojeek
+    - public
 contextPromotion: 
   enabled: false
 exa: 
@@ -87,5 +108,6 @@ features:
 bashInterceptor: 
   enabled: true
 dev: 
-  autoqa: 
-    consent: granted
+  autoqaConsent: granted
+generate_image: 
+  enabled: true
