@@ -1,0 +1,15 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "omp-plugins",
+      "dependencies": {
+        "omp-keysmith": "github:ParticleG/omp-keysmith",
+      },
+    },
+  },
+  "packages": {
+    "omp-keysmith": ["omp-keysmith@github:ParticleG/omp-keysmith#e1e092a", {}, "ParticleG-omp-keysmith-e1e092a", "sha512-oRYgnw56xqc4E+lPQRT2/bjuE+RjFt626z8sHRnUFduKppou3VD5Guo7cSDMSNYz1AoAM+fRUG0W22q2g/11Gg=="],
+  }
+}

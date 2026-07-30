@@ -1,0 +1,7 @@
+{
+  "name": "omp-plugins",
+  "private": true,
+  "dependencies": {
+    "omp-keysmith": "github:ParticleG/omp-keysmith"
+  }
+}

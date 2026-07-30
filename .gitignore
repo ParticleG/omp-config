@@ -4,6 +4,8 @@
 /agent/*.db-wal
 /agent/last-changelog-version
 /agent/blobs/
+/agent/cache/
+/agent/keysmith/
 /agent/memories/
 /agent/sessions/
 /agent/skills/easyeda-api/node_modules/
@@ -14,6 +16,7 @@
 /natives/
 /node_modules/
 /plugins/cache/marketplaces/
+/plugins/node_modules/
 /puppeteer/chrome/
 /run/daemons/
 /*.db
