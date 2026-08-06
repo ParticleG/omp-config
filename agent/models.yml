@@ -293,7 +293,7 @@ providers:
           cacheWrite: 3
 
   openai-codex:
-    baseUrl: https://cpa.studio26f.org/v1
+    baseUrl: https://cpa.studio26f.org/backend-api
     auth: apiKey
     apiKey: STUDIO26F_API_KEY
 

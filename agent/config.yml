@@ -36,9 +36,9 @@ todo:
   remindersMax: 5
 modelProviderOrder: 
   - openai-codex
+  - deepseek
   - ltcraft-aws-anthropic
   - ltcraft-kiro-anthropic
-  - deepseek
   - hajimi
 theme: 
   dark: titanium
