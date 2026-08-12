@@ -100,7 +100,7 @@ exa:
 advisor: 
   enabled: true
   syncBacklog: "3"
-  subagents: false
+  subagents: true
 marketplace: 
   autoUpdate: notify
 features: 
@@ -112,3 +112,5 @@ dev:
 generate_image: 
   enabled: true
 hideThinkingBlock: false
+tier: 
+  advisor: default

@@ -3,6 +3,7 @@
 /agent/*.db-shm
 /agent/*.db-wal
 /agent/last-changelog-version
+/agent/secret-placeholder.key
 /agent/blobs/
 /agent/cache/
 /agent/keysmith/
