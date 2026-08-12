@@ -1,0 +1,18 @@
+tools:
+  approvalMode: always-ask
+  approval:
+    bash: prompt
+    eval: prompt
+    task: deny
+
+bash:
+  patterns:
+    - match: "*lark-cli config risk-control off*"
+      approval: deny
+    - match: "*lark-cli api *"
+      approval: deny
+    - match: "*lark-cli*"
+      approval: deny
+
+secrets:
+  enabled: true
