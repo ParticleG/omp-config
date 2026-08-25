@@ -2,6 +2,7 @@
   "name": "omp-plugins",
   "private": true,
   "dependencies": {
+    "china-targeted-resume-plugin": "github:ParticleG/china-targeted-resume-plugin",
     "omp-keysmith": "github:ParticleG/omp-keysmith"
   }
 }

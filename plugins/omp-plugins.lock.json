@@ -4,6 +4,11 @@
       "version": "0.1.1",
       "enabledFeatures": null,
       "enabled": true
+    },
+    "china-targeted-resume-plugin": {
+      "version": "0.2.0",
+      "enabledFeatures": null,
+      "enabled": true
     }
   },
   "settings": {}

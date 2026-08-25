@@ -6,6 +6,12 @@
       "args": ["--python", "3.11", "blender-mcp"],
       "env": { "UV_PYTHON_PREFERENCE": "only-managed" }
     },
+    "boss-agent-cli": {
+      "type": "stdio",
+      "command": "/home/particleg/.local/bin/boss-mcp",
+      "args": ["--platform", "zhipin", "--role", "candidate"],
+      "timeout": 120000
+    },
     "ida-pro-mcp": {
       "type": "http",
       "url": "http://127.0.0.1:13337/mcp"

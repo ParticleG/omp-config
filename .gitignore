@@ -1,9 +1,16 @@
 # omp local state
+/*.db
+/*.db-shm
+/*.db-wal
+/gpu_cache.json
+/install-id
+
 /agent/*.db
 /agent/*.db-shm
 /agent/*.db-wal
 /agent/last-changelog-version
 /agent/secret-placeholder.key
+
 /agent/blobs/
 /agent/cache/
 /agent/keysmith/
@@ -20,8 +27,4 @@
 /plugins/node_modules/
 /puppeteer/chrome/
 /run/daemons/
-/*.db
-/*.db-shm
-/*.db-wal
-/gpu_cache.json
-/install-id
+/webcache/

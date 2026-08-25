@@ -1,7 +1,7 @@
 modelRoles: 
   default: gpt-5.6-sol:xhigh
   slow: gpt-5.6-sol:max
-  smol: gpt-5.6-sol:medium
+  smol: gpt-5.6-luna:xhigh
   vision: gpt-5.6-sol:max
   plan: gpt-5.6-sol:max
   designer: gpt-5.6-sol:xhigh
@@ -12,15 +12,23 @@ modelRoles:
 defaultThinkingLevel: max
 compaction: 
   enabled: true
-  strategy: context-full
+  methodOrder: 
+    - remote
+    - soft
 task: 
-  eager: preferred
+  eager: default
   maxConcurrency: 32
   maxRecursionDepth: 2
   showResolvedModelBadge: true
   enableLsp: true
   softRequestBudget: 150
   softRequestBudgetNotice: true
+  agentAdvisor: 
+    task: "on"
+  prewalk: false
+  isolation: 
+    mode: auto
+  enableEffort: true
 web_search: 
   enabled: true
 lsp: 
@@ -54,7 +62,7 @@ display:
 autoResume: false
 startup: 
   checkUpdate: false
-setupVersion: 1
+setupVersion: 2
 stt: 
   modelName: large
 memory: 
@@ -94,13 +102,9 @@ providers:
     - public
 contextPromotion: 
   enabled: false
-exa: 
-  enableResearcher: true
-  enableWebsets: true
 advisor: 
   enabled: true
   syncBacklog: "3"
-  subagents: true
 marketplace: 
   autoUpdate: notify
 features: 
@@ -114,3 +118,5 @@ generate_image:
 hideThinkingBlock: false
 tier: 
   advisor: default
+composer: 
+  shape: rule
