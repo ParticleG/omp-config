@@ -66,7 +66,7 @@ setupVersion: 2
 stt:
   modelName: large
 memory:
-  backend: mnemopi
+  backend: hindsight
 inspect_image:
   mode: "on"
 checkpoint:
@@ -122,3 +122,11 @@ composer:
   shape: rule
 mnemopi:
   scoping: per-project-tagged
+hindsight:
+  apiUrl: http://127.0.0.1:8888
+  bankId: omp-mnemopi-import
+  scoping: per-project-tagged
+  autoRecall: true
+  autoRetain: true
+  mentalModelsEnabled: true
+  mentalModelAutoSeed: true
