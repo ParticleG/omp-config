@@ -15,7 +15,7 @@
 
     "ajv-formats": ["ajv-formats@3.0.1", "", { "dependencies": { "ajv": "^8.0.0" } }, "sha512-8iUql50EUR+uUcdRQ3HDqa6EVyo3docL8g5WJ3FNcWmu62IbkGUue/pEyLBW8VGKKucTPgqeks4fIU1DA4yowQ=="],
 
-    "china-targeted-resume-plugin": ["china-targeted-resume-plugin@github:ParticleG/china-targeted-resume-plugin#386465e", { "dependencies": { "ajv": "8.17.1", "ajv-formats": "3.0.1" } }, "ParticleG-china-targeted-resume-plugin-386465e", "sha512-scZplc+iwZO06o1zR5I/Y8371Sp9Q0yXykQA7ezqCCGDvEdlDv3ATI/OWxRPqizuZM3dxN8BlWf1wYMpXE29hA=="],
+    "china-targeted-resume-plugin": ["china-targeted-resume-plugin@github:ParticleG/china-targeted-resume-plugin#da9cc56", { "dependencies": { "ajv": "8.17.1", "ajv-formats": "3.0.1" } }, "ParticleG-china-targeted-resume-plugin-da9cc56", "sha512-jDXpac5PtCarCj4AKzym+Vx4QJ7ua4mF2nzEB673IJRGS5JxwD+Rj5fcNcOHrXM2rXBaYwd539PX6Zcj6UFOtA=="],
 
     "fast-deep-equal": ["fast-deep-equal@3.1.3", "", {}, "sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q=="],
 
