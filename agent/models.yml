@@ -1,49 +1,5 @@
 # OMP Model & Provider Configuration
 providers:
-  deepseek:
-    baseUrl: https://api.deepseek.com
-    api: openai-completions
-    apiKey: DEEPSEEK_API_KEY
-    authHeader: true
-    # USD per 1M tokens at peak rates; off-peak rates are half.
-    # Use OMP's native DeepSeek thinking and exact reasoning-content replay.
-    models:
-      - id: deepseek-flash
-        name: DeepSeek V4.1 Flash
-        reasoning: true
-        thinking:
-          efforts: [low, high, max]
-          defaultLevel: high
-          requiresEffort: false
-          mode: effort
-        # Native vision is supported, but OMP 18.1.16 strips images on this API.
-        input: [text, image]
-        contextWindow: 1000000
-        # Provider capacity; OMP 18.1.16 caps Chat Completions requests at 64000.
-        maxTokens: 384000
-        cost:
-          input: 0.30
-          output: 1.20
-          cacheRead: 0.006
-          cacheWrite: 0
-      # Routes to V4.1 Flash at Flash rates from 2026-09-14 12:00 Asia/Shanghai.
-      - id: deepseek-v4-pro
-        name: DeepSeek V4 Pro 0813 - retires 2026-09-14
-        reasoning: true
-        thinking:
-          efforts: [low, high, max]
-          defaultLevel: high
-          requiresEffort: false
-          mode: effort
-        input: [text]
-        contextWindow: 1000000
-        maxTokens: 384000
-        cost:
-          input: 1.32
-          output: 3.96
-          cacheRead: 0.044
-          cacheWrite: 0
-
   openai-codex:
     baseUrl: https://cpa.studio26f.org/backend-api
     auth: apiKey
