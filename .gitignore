@@ -26,5 +26,6 @@
 /plugins/cache/marketplaces/
 /plugins/node_modules/
 /puppeteer/chrome/
+/remote-host/
 /run/daemons/
 /webcache/
