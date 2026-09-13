@@ -1,14 +1,13 @@
 modelRoles:
+  advisor: gpt-6-astra:xhigh
+  commit: gpt-6-astra:high
   default: gpt-6-astra:xhigh
+  plan: gpt-6-astra:xhigh
   slow: gpt-6-astra:max
   smol: deepseek-flash:max
+  task: gpt-6-astra:auto
+  tiny: "@smol"
   vision: gpt-6-astra:high
-  plan: gpt-6-astra:xhigh
-  designer: gpt-6-astra:xhigh
-  commit: gpt-6-astra:high
-  tiny: deepseek-flash:max
-  task: gpt-6-astra:high
-  advisor: gpt-6-astra:xhigh
 defaultThinkingLevel: max
 compaction:
   enabled: true
@@ -72,6 +71,7 @@ checkpoint:
 github:
   enabled: true
 providers:
+  autoThinkingMaxEffort: max
   openaiWebsockets: auto
   fetch: auto
   webSearchOrder:
@@ -130,3 +130,6 @@ hindsight:
   mentalModelAutoSeed: true
 isolation:
   backend: auto
+bash:
+  autoBackground:
+    enabled: true
