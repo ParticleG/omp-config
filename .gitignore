@@ -27,5 +27,6 @@
 /plugins/node_modules/
 /puppeteer/chrome/
 /remote-host/
+/run/collab-hosts/
 /run/daemons/
 /webcache/
