@@ -1,13 +1,14 @@
 modelRoles:
-  advisor: gpt-6-astra:xhigh
-  commit: gpt-6-astra:high
-  default: gpt-6-astra:xhigh
+  advisor: gpt-6-sol:max
+  commit: gpt-6-sol:xhigh
+  default: gpt-6-sol:max
   plan: gpt-6-astra:xhigh
   slow: gpt-6-astra:max
   smol: deepseek-flash:max
-  task: gpt-6-astra:auto
+  task: gpt-6-sol:auto
   tiny: "@smol"
-  vision: gpt-6-astra:high
+  vision: gpt-5.6-sol:xhigh
+  web: web/exa
 defaultThinkingLevel: max
 compaction:
   enabled: true
@@ -62,8 +63,6 @@ autoResume: false
 startup:
   checkUpdate: false
 setupVersion: 2
-stt:
-  modelName: large
 memory:
   backend: hindsight
 checkpoint:
@@ -74,30 +73,6 @@ providers:
   autoThinkingMaxEffort: max
   openaiWebsockets: auto
   fetch: auto
-  webSearchOrder:
-    - exa
-    - perplexity
-    - gemini
-    - anthropic
-    - codex
-    - xai
-    - zai
-    - tinyfish
-    - jina
-    - kagi
-    - tavily
-    - firecrawl
-    - brave
-    - kimi
-    - parallel
-    - synthetic
-    - searxng
-    - startpage
-    - duckduckgo
-    - ecosia
-    - google
-    - mojeek
-    - public
 contextPromotion:
   enabled: false
 advisor:
@@ -133,3 +108,34 @@ isolation:
 bash:
   autoBackground:
     enabled: true
+retry:
+  fallbackChains:
+    web:
+      - web/perplexity
+      - google-gemini-cli/gemini-2.5-flash
+      - google-antigravity/gemini-2.5-flash
+      - google/gemini-2.5-flash
+      - anthropic/claude-haiku-4-5
+      - openai-codex/gpt-5.6-luna
+      - xai/grok-4.5
+      - web/zai
+      - web/tinyfish
+      - web/jina
+      - web/kagi
+      - web/tavily
+      - web/firecrawl
+      - web/brave
+      - web/kimi
+      - web/parallel
+      - web/synthetic
+      - web/searxng
+      - web/startpage
+      - web/duckduckgo
+      - web/ecosia
+      - web/google
+      - web/mojeek
+      - web/public
+      - openai-codex/gpt-5.6
+      - openai-codex/gpt-5.5
+      - xai-oauth/grok-4.5
+      - web/ollama
