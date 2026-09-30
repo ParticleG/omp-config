@@ -4,3 +4,20 @@ providers:
     baseUrl: https://cpa.studio26f.org/backend-api
     auth: apiKey
     apiKey: STUDIO26F_API_KEY
+    models:
+      - id: gpt-6.1-sol
+        name: GPT-6.1 Sol
+        api: openai-codex-responses
+        reasoning: true
+        thinking:
+          mode: effort
+          efforts: [low, medium, high, xhigh, max]
+          requiresEffort: true
+        input: [text, image]
+        contextWindow: 272000
+        maxTokens: 128000
+        cost:
+          input: 2
+          output: 10
+          cacheRead: 0.1
+          cacheWrite: 2.5

@@ -15,6 +15,7 @@
 /agent/cache/
 /agent/keysmith/
 /agent/memories/
+/agent/predict/ngram/
 /agent/sessions/
 /agent/skills/easyeda-api/node_modules/
 /agent/terminal-sessions/
