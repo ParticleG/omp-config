@@ -1,7 +1,7 @@
 # OMP Model & Provider Configuration
 providers:
   openai-codex:
-    baseUrl: https://cpa.a-minos.org/backend-api
+    baseUrl: https://cpa.studio26f.org:8443/backend-api
     auth: apiKey
     apiKey: STUDIO26F_API_KEY
     models:
@@ -21,3 +21,43 @@ providers:
           output: 10
           cacheRead: 0.1
           cacheWrite: 2.5
+  cpa-studio26f:
+    baseUrl: https://cpa.studio26f.org:8443/v1
+    auth: apiKey
+    apiKey: STUDIO26F_API_KEY
+    api: openai-responses
+    models:
+      - id: intern-s2
+        name: 书生-S2
+        reasoning: true
+        thinking:
+          mode: effort
+          efforts: [low, medium, high]
+          requiresEffort: true
+        supportsTools: true
+        input: [text, image]
+        contextWindow: 256000
+        maxTokens: 128000
+      - id: Atria-Dawn-Preview
+        name: Atria Dawn Preview
+        # The official model card also reports 256K context and text-only input.
+        reasoning: true
+        thinking:
+          mode: effort
+          efforts: [low, medium, high]
+          requiresEffort: true
+        supportsTools: true
+        input: [text]
+        contextWindow: 256000
+        maxTokens: 128000
+      - id: Agents-A1
+        name: Agents A1
+        reasoning: true
+        thinking:
+          mode: effort
+          efforts: [low, medium, high]
+          requiresEffort: true
+        supportsTools: true
+        input: [text, image]
+        contextWindow: 256000
+        maxTokens: 128000
