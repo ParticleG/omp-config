@@ -61,3 +61,24 @@ providers:
         input: [text, image]
         contextWindow: 256000
         maxTokens: 128000
+      - id: deepseek-v4-flash-vision
+        name: DeepSeek V4 Flash Vision
+        # Gateway ID; DeepSeek now recommends deepseek-flash instead of deepseek-v4-flash-vision-exp.
+        # Official reference limits and capabilities; gateway routing and limits are unverified.
+        # https://api-docs.deepseek.com/quick_start/agent_integrations/codex
+        # https://api-docs.deepseek.com/api/create-chat-completion
+        # https://api-docs.deepseek.com/guides/thinking_mode
+        reasoning: true
+        thinking:
+          mode: effort
+          efforts: [low, high, max]
+          defaultLevel: high
+          requiresEffort: false
+        supportsTools: true
+        input: [text, image]
+        contextWindow: 1048576
+        maxTokens: 393216
+        compat:
+          statefulResponses: false
+          supportsReasoningSummary: false
+          supportsImageDetailOriginal: true
