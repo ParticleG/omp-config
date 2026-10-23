@@ -13,6 +13,7 @@
 
 /agent/blobs/
 /agent/cache/
+/agent/custom-session-files/
 /agent/keysmith/
 /agent/memories/
 /agent/predict/ngram/
@@ -20,6 +21,7 @@
 /agent/skills/easyeda-api/node_modules/
 /agent/terminal-sessions/
 /agent/webcache/
+/autoresearch/
 /browser-profiles/
 /cache/
 /logs/
