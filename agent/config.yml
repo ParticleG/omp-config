@@ -1,9 +1,9 @@
 modelRoles:
-  advisor: gpt-6.1-sol:max
+  advisor: gpt-6-astra:max
   commit: gpt-6.1-sol:xhigh
   default: gpt-6.1-sol:max
-  plan: gpt-6.1-sol:max
-  slow: gpt-6.1-sol:max
+  plan: gpt-6-astra:max
+  slow: gpt-6-astra:max
   smol: deepseek-flash:max
   task: gpt-6.1-sol:auto
   tiny: "@smol"
@@ -89,8 +89,6 @@ dev:
 generate_image:
   enabled: true
 hideThinkingBlock: false
-tier:
-  advisor: default
 composer:
   shape: rule
 mnemopi:
@@ -139,3 +137,7 @@ retry:
       - openai-codex/gpt-5.5
       - xai-oauth/grok-4.5
       - web/ollama
+collab:
+  autoStart: control
+security:
+  enabled: true

@@ -1,0 +1,8 @@
+memory:
+  backend: mem0
+mem0:
+  apiUrl: https://mem0.studio26f.org:8443
+  apiKey: x413LTtT2tUuOvnnoFUlLe8mQ9-iuDNpGSr9aaqILRLVdNGPtBIb0ruhgp1s8WOo
+  userId: particleg
+  autoRecall: false
+  autoRetain: false
