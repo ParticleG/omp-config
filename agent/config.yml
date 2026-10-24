@@ -141,3 +141,7 @@ collab:
   autoStart: control
 security:
   enabled: true
+speech:
+  enhanced: true
+speechgen:
+  enabled: true
