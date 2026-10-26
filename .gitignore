@@ -8,6 +8,7 @@
 /agent/*.db
 /agent/*.db-shm
 /agent/*.db-wal
+/agent/kimi-device-id
 /agent/last-changelog-version
 /agent/secret-placeholder.key
 

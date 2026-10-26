@@ -1,5 +1,11 @@
 # OMP Model & Provider Configuration
 providers:
+  anthropic:
+    baseUrl: https://cpa.a-minos.org
+    api: anthropic-messages
+    auth: apiKey
+    apiKey: AMINOS_API_KEY
+    authHeader: true
   openai-codex:
     baseUrl: https://cpa.studio26f.org:8443/backend-api
     auth: apiKey

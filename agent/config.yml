@@ -1,14 +1,15 @@
 modelRoles:
-  advisor: gpt-6-astra:max
+  advisor: claude-opus-5-5:max
   commit: gpt-6.1-sol:xhigh
-  default: gpt-6.1-sol:max
-  plan: gpt-6-astra:max
-  slow: gpt-6-astra:max
+  default: claude-opus-5-5:xhigh
+  plan: claude-opus-5-5:max
+  slow: claude-opus-5-5:max
   smol: deepseek-flash:max
   task: gpt-6.1-sol:auto
   tiny: "@smol"
   vision: gpt-6.1-sol:xhigh
   web: web/exa
+  judge: deepseek-flash:max
 defaultThinkingLevel: max
 compaction:
   enabled: true
@@ -21,11 +22,11 @@ task:
   maxRecursionDepth: 2
   showResolvedModelBadge: true
   enableLsp: true
-  softRequestBudget: 150
+  softRequestBudget: 200
   softRequestBudgetNotice: true
   agentAdvisor:
     task: "on"
-  prewalk: false
+  prewalk: true
   isolation:
     enabled: true
   enableEffort: true
@@ -59,6 +60,7 @@ statusLine:
 display:
   shimmer: classic
   showTokenUsage: true
+  subagentLivePreview: true
 autoResume: false
 startup:
   checkUpdate: false
@@ -138,10 +140,16 @@ retry:
       - xai-oauth/grok-4.5
       - web/ollama
 collab:
-  autoStart: control
+  autoStart: "off"
 security:
   enabled: true
 speech:
   enhanced: true
 speechgen:
   enabled: true
+tui:
+  mouse: true
+tier:
+  advisor: inherit
+prewalk:
+  auto: suggest
