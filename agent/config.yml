@@ -1,9 +1,9 @@
 modelRoles:
-  advisor: claude-opus-5-5:max
+  advisor: gpt-6-astra:max
   commit: gpt-6.1-sol:xhigh
   default: claude-opus-5-5:xhigh
-  plan: claude-opus-5-5:max
-  slow: claude-opus-5-5:max
+  plan: gpt-6-astra:max
+  slow: gpt-6-astra:max
   smol: deepseek-flash:max
   task: gpt-6.1-sol:auto
   tiny: "@smol"
