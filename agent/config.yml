@@ -1,7 +1,7 @@
 modelRoles:
   advisor: gpt-6-astra:max
   commit: gpt-6.1-sol:xhigh
-  default: claude-opus-5-5:xhigh
+  default: gpt-6.1-sol:max
   plan: gpt-6-astra:max
   slow: gpt-6-astra:max
   smol: deepseek-flash:max
@@ -17,7 +17,6 @@ compaction:
     - remote
     - soft
 task:
-  eager: default
   maxConcurrency: 32
   maxRecursionDepth: 2
   showResolvedModelBadge: true

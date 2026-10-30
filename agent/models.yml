@@ -6,27 +6,28 @@ providers:
     auth: apiKey
     apiKey: AMINOS_API_KEY
     authHeader: true
+  antigravity:
+    # Keep CLIProxyAPI model IDs separate from native google-antigravity OAuth routes.
+    baseUrl: https://cpa.a-minos.org/v1beta
+    api: google-generative-ai
+    auth: apiKey
+    apiKey: AMINOS_API_KEY
+    authHeader: true
+    models:
+      - id: claude-sonnet-5-5-high
+      - id: claude-opus-5-5-high
+      - id: gemini-4-argon-high
+      - id: gemini-3.8-flash-high
+      - id: gemini-3.5-flash-lite
+      - id: gemini-3.1-flash-lite
+      - id: gemini-3-flash
+      - id: gpt-oss-120b-medium
+      - id: gemini-3.1-flash-image
+        kind: image
   openai-codex:
     baseUrl: https://cpa.studio26f.org:8443/backend-api
     auth: apiKey
     apiKey: STUDIO26F_API_KEY
-    models:
-      - id: gpt-6.1-sol
-        name: GPT-6.1 Sol
-        api: openai-codex-responses
-        reasoning: true
-        thinking:
-          mode: effort
-          efforts: [low, medium, high, xhigh, max]
-          requiresEffort: true
-        input: [text, image]
-        contextWindow: 272000
-        maxTokens: 128000
-        cost:
-          input: 2
-          output: 10
-          cacheRead: 0.1
-          cacheWrite: 2.5
   cpa-studio26f:
     baseUrl: https://cpa.studio26f.org:8443/v1
     auth: apiKey
