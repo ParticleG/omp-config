@@ -45,8 +45,8 @@ todo:
 modelProviderOrder:
   - anthropic
   - openai-codex
-  - deepseek
   - antigravity
+  - deepseek
   - cpa-studio26f
 theme:
   dark: titanium
