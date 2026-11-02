@@ -41,7 +41,6 @@ Git 只跟踪手工维护的文件：设置、模型路由、提示词文件、�
 | `agent/skills/` | 六个本地技能 |
 | `agent/feishu-safe.yml` | 处理飞书事务时按需启用的设置覆盖层（overlay） |
 | `agent/mcp.json` | MCP 服务器：Blender、BOSS 直聘 |
-| `agent/mem0.yml` | 旧版 mem0 记忆覆盖层 |
 | `agent/.clawhub/lock.json` | `easyeda-api` 技能的 ClawHub 安装锁 |
 | `browser-relay/extension/` | `omp browser-relay` 使用的 Chrome 扩展 |
 | `plugins/` | 插件清单、Bun 锁文件与启用状态 |
@@ -75,7 +74,8 @@ Git 只跟踪手工维护的文件：设置、模型路由、提示词文件、�
 
 5. 安装 EasyEDA 桥接依赖：`cd ~/.omp/agent/skills/easyeda-api && npm install`。
 6. 在 Chrome 中以“加载已解压的扩展程序”方式加载 `~/.omp/browser-relay/extension/`（见 [browser-relay/extension/](#browser-relayextension)）。
-7. 可选：为编辑器中的 `.ts` 类型检查安装依赖：`cd ~/.omp && bun install`。
+7. 安装 MCP 服务器的前置程序：`blender` 需要 `uv`（提供 `uvx`），`boss-agent-cli` 需要位于 `~/.local/bin/boss-mcp` 的程序。缺少可执行文件时，omp 会为该服务器记录 `MCP tool load failed`，并在没有其工具的情况下继续启动。
+8. 可选：为编辑器中的 `.ts` 类型检查安装依赖：`cd ~/.omp && bun install`。
 
 ## agent/agents/fixer.md
 
@@ -87,7 +87,7 @@ Git 只跟踪手工维护的文件：设置、模型路由、提示词文件、�
 | `description` | “Fast execution specialist …” | 显示在 `task` 工具的 agent 列表中，父模型据此挑选 agent |
 | `model` | `[pi/smol]` | `pi/` 是角色别名的旧前缀（等同 `@smol`），因此模型经由 `modelRoles.smol` 解析，当前为 `deepseek-flash` |
 | `thinkingLevel` | `low` | 声明的推理档位。由于开启了 `task.enableEffort`，调用方为单个任务传入的 `effort`（`lo`/`med`/`hi`）在启动时优先 |
-| `spawns` | `[explore]` | `fixer` 可以再启动的 agent。omp 18.14 没有名为 `explore` 的 agent（只读探索 agent 是 `scout`），所以这一项实际上不授予任何可用目标 |
+| `spawns` | `[scout]` | `fixer` 可以再启动的 agent：内置的只读探索 agent `scout`，用于在任务中查找代码 |
 
 Markdown 正文就是该 agent 的系统提示词：拥有完整工具权限；只处理指派的目标及其直接相关的调用点或测试；输出简洁、不附工具记录；先做窄范围查找再读取所需片段；优先修改已有文件；除非明确要求，不新建 Markdown 文件或 mock；需求不清时提问而不是猜测；坚持到任务完成。
 
@@ -173,7 +173,7 @@ URL 或令牌缺失、无效时，模块记录 `configuration_missing` 或 `conf
 
 `lark-*` 技能本身位于 `~/.agents/skills/`，不在本仓库中。
 
-> **加载注意事项。** omp 按 frontmatter 给规则文件分类：`alwaysApply: true` 会把正文注入每个系统提示词；有 `description` 的规则会列入规则手册（rulebook），由模型按需读取；`condition`、`astCondition` 或 `question` 会使其成为流式触发规则（TTSR）。本文件没有 frontmatter，omp 18.14 不会把它归入任何一类，模型也就看不到它。加上 `alwaysApply: true` 或 `description` 即可生效。
+frontmatter 设置了 `alwaysApply: true`，因此 omp 会把完整正文注入每个系统提示词的 `<generic-rules>` 块，主会话与子代理都会收到（该规则没有 `agents` 过滤）。既没有 `alwaysApply`、`description`，也没有触发条件的规则文件，模型永远看不到。
 
 ## agent/skills/
 
@@ -239,17 +239,15 @@ omp 在 `agent/tools/` 中发现的自定义工具工厂（`CustomToolFactory`�
 
 | 文件 | omp 的加载方式 | 是否传给 `task` 子代理 | 内容 |
 |---|---|---|---|
-| `AGENTS.md` | 用户级上下文文件，渲染在主会话与 advisor 的项目说明 `<repo-rules>` 块中 | 否 | 按技术栈列出 `~/coding` 子目录（WebStorm：TypeScript/Vue/Angular/Bun 等，GoLand：Go，CLion：C++23/CMake/vcpkg，PyCharm：Python/FastAPI 等，OtherProjects：Tauri/Rust/Terraform/Docker 等，DataGrip：SQL，OfficeAddinProjects：Office.js/React，WritersideProjects：文档）；查找项目的规则（忽略大小写与分隔符、支持部分匹配、优先在对应技术栈目录查找、多个匹配时询问）；IDA Pro 逆向分析请求的技能路由 |
+| `AGENTS.md` | 用户级上下文文件，渲染在主会话与 advisor 的项目说明 `<repo-rules>` 块中 | 否 | 按技术栈列出 `~/coding` 子目录（WebStorm：TypeScript/Vue/Angular/Bun 等，GoLand：Go，CLion：C++23/CMake/vcpkg，PyCharm：Python/FastAPI 等，OtherProjects：Tauri/Rust/Terraform/Docker 等，DataGrip：SQL，OfficeAddinProjects：Office.js/React，WritersideProjects：文档）；查找项目的规则（忽略大小写与分隔符、支持部分匹配、优先在对应技术栈目录查找、多个匹配时询问） |
 | `APPEND_SYSTEM.md` | 原样追加在默认系统提示词与项目上下文之后，默认提示词保持完整 | 否 | 交互使用简体中文；代码、注释和项目文档使用英文；不翻译符号、命令、路径和配置键；遵循项目风格，与官方风格有实质冲突时先确认；Plan Mode 输出使用中文；工程范围规则：尊重明确决定、选择最简单的完整方案、只在有具体需求时加闸门或回退、移除 agent 自行添加的多余内容、保持兼容性契约、按比例验证、满足验收标准即停止 |
 | `RULES.md` | 名为 `RULES` 的常驻 always-apply 规则：完整正文随每次请求发送，会话开始以及 `/new`、`/clear` 时重新读取，无法改成条件规则 | 是 | 需要输入密码的命令（`sudo`、`su`、`ssh`）只能在前台 `pty: true` 的 Bash 调用中运行；禁止 `sudo -S`；密码不得出现在命令、环境变量、管道、文件或日志中；没有 PTY 时停止；只能在同一个 PTY 调用中用 `sudo -v` 复用凭据；工具无法确定的破坏性操作、权限/安全、数据迁移、外部接口、架构方向与 UI/UX 取舍必须先确认；优先使用 `ask` 工具并给出 2–5 个选项 |
 
 **为什么分成三个文件：** omp 建议把长期背景放进 `AGENTS.md`，把少量必须在长对话中保持可见的硬性要求放进 `RULES.md`。`APPEND_SYSTEM.md` 在默认提示词之上叠加偏好，而不是像 `SYSTEM.md` 那样替换它。`task` 子代理会丢弃 `AGENTS.md` 与 `APPEND_SYSTEM.md`，但保留 `RULES.md`，因此密码与确认相关的安全规则对委派任务同样有效。
 
-> `AGENTS.md` 的 IDA Pro 小节仍指向 `skill://ida-pro-mcp`。该技能已在提交 `2ad5d80` 中删除，omp 18.14 中没有同名技能。
-
 ## agent/config.yml
 
-全局设置层。项目 `.omp/config.yml`、`--config` 覆盖层以及环境变量和 CLI 覆盖都位于它之上；上层的数组会整体替换而不是追加。本文件共设置 69 个键：40 个修改了内置默认值，29 个与默认值相同，用于在上游默认值变化时固定行为。
+全局设置层。项目 `.omp/config.yml`、`--config` 覆盖层以及环境变量和 CLI 覆盖都位于它之上；上层的数组会整体替换而不是追加。本文件共设置 68 个键：39 个修改了内置默认值，29 个与默认值相同，用于在上游默认值变化时固定行为。
 
 ### 模型角色（`modelRoles`）
 
@@ -275,7 +273,7 @@ omp 在 `agent/tools/` 中发现的自定义工具工厂（`CustomToolFactory`�
 |---|---|---|---|---|
 | `defaultThinkingLevel` | `max` | `high` | 选择器未带 `:level` 后缀时，支持推理的模型所用的档位 | 质量优先；上面每个角色本身已固定档位 |
 | `providers.autoThinkingMaxEffort` | `max` | `xhigh` | `:auto` 选择器（此处为 `modelRoles.task`）的档位上限 | 允许分类器在它判定为特殊的回合使用 `max` |
-| `modelProviderOrder` | `openai-codex`、`deepseek`、`ltcraft-aws-anthropic`、`ltcraft-kiro-anthropic`、`hajimi` | `[]` | 同一个裸模型 id 存在于多个 provider 时的优先顺序 | 让 `gpt-6.1-sol` 这类裸 id 优先解析到 Codex 网关，其次是 DeepSeek。后三个 provider 已在提交 `5c83bf0` 中从 `models.yml` 删除，目前不匹配任何对象 |
+| `modelProviderOrder` | `openai-codex`、`deepseek` | `[]` | 同一个裸模型 id 存在于多个 provider 时的优先顺序 | 让 `gpt-6.1-sol` 这类裸 id 优先解析到 Codex 网关，其次是 DeepSeek |
 | `retry.fallbackChains.web` | 28 个候选 | `{}` | `web` 角色失败或不可用时按序回退：Perplexity；经三条 Google 路由的 Gemini 2.5 Flash；Claude Haiku 4.5；GPT-5.6 Luna；Grok 4.5；17 个 `web/*` 搜索后端（Z.ai、TinyFish、Jina、Kagi、Tavily、Firecrawl、Brave、Kimi、Parallel、Synthetic、SearXNG、Startpage、DuckDuckGo、Ecosia、Google、Mojeek、public）；经 Codex 的 GPT-5.6/GPT-5.5；经 xAI OAuth 的 Grok；Ollama | 搜索逐级降级而不是直接失败：不可用的候选（例如缺少凭据）会被跳过。omp 加载时会把旧的 `openai-codex/gpt-5.6` 和 `openai-codex/gpt-5.5` 规范化为 `openai-codex/gpt-5.6-sol`，实际生效 27 个候选 |
 
 ### 子代理
@@ -294,14 +292,13 @@ omp 在 `agent/tools/` 中发现的自定义工具工厂（`CustomToolFactory`�
 | `task.softRequestBudgetNotice` | `true` | 相同 | 发送上述收尾提醒 | 固定默认值 |
 | `task.showResolvedModelBadge` | `true` | `false` | 在任务组件中显示每个子代理实际使用的模型 | 角色别名、prewalk 交接与回退会让实际模型不直观 |
 
-### Advisor 与 prewalk
+### Advisor
 
 | 键 | 值 | 默认值 | 作用 | 原因 |
 |---|---|---|---|---|
 | `advisor.enabled` | `true` | `false` | 由第二个模型（`advisor` 角色，GPT-6 Astra）审阅主回合并注入意见 | 对主模型的工作做独立审阅 |
 | `advisor.syncBacklog` | `"3"` | `off` | 待处理的审阅达到 3 条及以上时暂停主 agent，最长 30 秒 | 让意见在仍然相关时送达；上限避免长时间卡住 |
 | `tier.advisor` | `inherit` | `none` | advisor 跟随主 agent 当前按模型家族设置的服务等级 | 开启 `/fast` 的会话会得到同样快的 advisor |
-| `prewalk.auto` | `suggest` | `off` | 对每个新任务询问 `judge` 角色是否值得 prewalk 交接，只报告结论 | 先观察分类器的判断，再考虑让它切换模型（`on`）。auto-prewalk 只使用原生判定后端（TypeSafe Jev、OpenRouter、OpenAI Decisions、Workers AI Clef）；`judge` 目前是聊天模型 `deepseek-flash`，因此不会分类也不会报告任何内容 |
 
 ### 上下文与记忆
 
@@ -488,10 +485,9 @@ omp browser-relay -p 9333 --token s3cret
 
 | 路径 | 说明 |
 |---|---|
-| `agent/mcp.json` | MCP 服务器：`blender`（`uvx --python 3.11 blender-mcp`，只用 uv 管理的 Python）与 `boss-agent-cli`（本地 `boss-mcp` 程序，BOSS 直聘求职者角色，超时 120 秒） |
-| `agent/mem0.yml` | 把记忆切换到自托管 mem0 服务的覆盖层。omp 18.14 的 `memory.backend` 只接受 `off`、`local`、`hindsight`、`mnemopi` 和 `sharpshooter`，因此该文件对当前版本没有作用 |
+| `agent/mcp.json` | MCP 服务器：`blender`（`uvx --python 3.11 blender-mcp`，只用 uv 管理的 Python，需要安装 `uv`）与 `boss-agent-cli`（本地程序 `~/.local/bin/boss-mcp`，BOSS 直聘求职者角色，超时 120 秒）。可执行文件缺失时，omp 会跳过该服务器 |
 | `agent/.clawhub/lock.json` | ClawHub 锁文件，记录来自 `yanranxiaoxi` 的 `easyeda-api` 1.1.3 |
-| `hindsight/compose.yaml` | 以 `omp-hindsight` 容器运行 Hindsight 0.9.2（`ghcr.io/vectorize-io/hindsight`）：端口 8888 与 9999 绑定在 `127.0.0.1`，LLM 为经 `cpa.studio26f.org` Responses 端点访问的 `gpt-5.4-mini`（`STUDIO26F_API_KEY`），数据存放在 `omp-hindsight-data` 卷中 |
+| `hindsight/compose.yaml` | 以 `omp-hindsight` 容器运行 Hindsight 0.9.2（`ghcr.io/vectorize-io/hindsight`）：端口 8888 与 9999 绑定在 `127.0.0.1`；事实抽取与 mental model 刷新使用 LLM `gpt-6-luna`，经网关 Responses 端点 `cpa.studio26f.org:8443/v1` 访问（`STUDIO26F_API_KEY`）；数据存放在 `omp-hindsight-data` 卷中；随 Docker 守护进程自动重启（`restart: unless-stopped`） |
 | `hindsight/migrate_mnemopi.py` | 失败即停、可断点续跑的 Mnemopi → Hindsight 迁移脚本：`prepare`、`import --phase canary/all`、`verify`、`finalize`；测试位于 `test_migrate_mnemopi.py`。运行目录（`migrations/`）与 `.env` 已忽略 |
 | `hindsight/mnemopi-rollback-config.yml` | 恢复 `memory.backend: mnemopi` 的覆盖层（`omp --config hindsight/mnemopi-rollback-config.yml`） |
 | `openai-analysis.md` | Artificial Analysis Intelligence Index v4.1 中 GPT-5.6 Luna 与 Sol 各档位的数据：单任务成本、单任务耗时、输出速度、端到端延迟 |

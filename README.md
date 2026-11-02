@@ -41,7 +41,6 @@ Defaults quoted in this document come from the omp 18.14 settings schema, read w
 | `agent/skills/` | Six local skills |
 | `agent/feishu-safe.yml` | Opt-in settings overlay for Feishu work |
 | `agent/mcp.json` | MCP servers: Blender, BOSS Zhipin |
-| `agent/mem0.yml` | Legacy mem0 memory overlay |
 | `agent/.clawhub/lock.json` | ClawHub install lock for the `easyeda-api` skill |
 | `browser-relay/extension/` | Chrome extension used by `omp browser-relay` |
 | `plugins/` | Plugin manifest, Bun lockfile and enablement state |
@@ -75,7 +74,8 @@ Defaults quoted in this document come from the omp 18.14 settings schema, read w
 
 5. Install the EasyEDA bridge dependency: `cd ~/.omp/agent/skills/easyeda-api && npm install`.
 6. Load `~/.omp/browser-relay/extension/` in Chrome as an unpacked extension (see [browser-relay/extension/](#browser-relayextension)).
-7. Optional, for type checking the `.ts` files in an editor: `cd ~/.omp && bun install`.
+7. Install the MCP server prerequisites: `uv` (provides `uvx`) for `blender`, and the `boss-mcp` binary at `~/.local/bin/boss-mcp` for `boss-agent-cli`. When an executable is missing, omp logs `MCP tool load failed` for that server and starts without its tools.
+8. Optional, for type checking the `.ts` files in an editor: `cd ~/.omp && bun install`.
 
 ## agent/agents/fixer.md
 
@@ -87,7 +87,7 @@ Defaults quoted in this document come from the omp 18.14 settings schema, read w
 | `description` | "Fast execution specialist …" | Shown in the `task` tool's agent roster; the parent model picks agents by it |
 | `model` | `[pi/smol]` | `pi/` is the legacy role-alias prefix (same as `@smol`), so the model resolves through `modelRoles.smol`, currently `deepseek-flash` |
 | `thinkingLevel` | `low` | Declared reasoning effort. Because `task.enableEffort` is on, a caller's per-task `effort` (`lo`/`med`/`hi`) takes precedence at launch |
-| `spawns` | `[explore]` | Agents `fixer` may start. omp 18.14 ships no agent named `explore` (its read-only explorer is `scout`), so this grants no usable target |
+| `spawns` | `[scout]` | Agents `fixer` may start: the bundled read-only `scout`, for codebase lookups during a task |
 
 The Markdown body is the agent's system prompt: full tool access; stay on the assigned target and its directly required callsites or tests; concise output without tool transcripts; narrow lookups before reading ranges; prefer editing existing files; no new Markdown files or mocks unless asked; ask instead of guessing; keep going until the assignment is complete.
 
@@ -173,7 +173,7 @@ A user-level rule file; omp discovers `agent/rules/*.md`. It tells the agent how
 
 The `lark-*` skills themselves live in `~/.agents/skills/`, outside this repository.
 
-> **Loading caveat.** omp sorts rule files by frontmatter: `alwaysApply: true` injects the body into every system prompt, a `description` lists the rule in the rulebook for on-demand reading, and `condition`, `astCondition` or `question` make it a stream-triggered (TTSR) rule. This file has no frontmatter, so omp 18.14 puts it in none of those buckets and the model never sees it. Add `alwaysApply: true` or a `description` to activate it.
+The frontmatter sets `alwaysApply: true`, so omp injects the full body into the `<generic-rules>` block of every system prompt, in main sessions and subagents alike (the rule has no `agents` filter). A rule file without `alwaysApply`, a `description` or a trigger condition is never shown to the model.
 
 ## agent/skills/
 
@@ -239,17 +239,15 @@ Three user-level prompt files in `agent/`, each loaded differently:
 
 | File | How omp loads it | Reaches `task` subagents | Content |
 |---|---|---|---|
-| `AGENTS.md` | User-level context file, rendered in the `<repo-rules>` block of the generated project instructions for main sessions and advisors | No | Map of `~/coding` subdirectories by tech stack (WebStorm: TypeScript/Vue/Angular/Bun…, GoLand: Go, CLion: C++23/CMake/vcpkg, PyCharm: Python/FastAPI…, OtherProjects: Tauri/Rust/Terraform/Docker…, DataGrip: SQL, OfficeAddinProjects: Office.js/React, WritersideProjects: docs); project lookup rules (ignore case and separators, allow partial matches, prefer the stack's directory, ask when several match); routing for IDA Pro reverse-engineering requests |
+| `AGENTS.md` | User-level context file, rendered in the `<repo-rules>` block of the generated project instructions for main sessions and advisors | No | Map of `~/coding` subdirectories by tech stack (WebStorm: TypeScript/Vue/Angular/Bun…, GoLand: Go, CLion: C++23/CMake/vcpkg, PyCharm: Python/FastAPI…, OtherProjects: Tauri/Rust/Terraform/Docker…, DataGrip: SQL, OfficeAddinProjects: Office.js/React, WritersideProjects: docs); project lookup rules (ignore case and separators, allow partial matches, prefer the stack's directory, ask when several match) |
 | `APPEND_SYSTEM.md` | Appended verbatim after the default system prompt and project context; the default prompt stays intact | No | Interaction in Simplified Chinese; code, comments and project docs in English; never translate symbols, commands, paths or keys; follow project style and confirm material conflicts with official style; Plan Mode output in Chinese; engineering scope rules: honor explicit decisions, prefer the simplest complete solution, add gates/fallbacks only for concrete needs, remove agent-invented extras, preserve compatibility contracts, validate proportionately, stop when acceptance criteria pass |
 | `RULES.md` | Sticky always-apply rule named `RULES`: the full body travels with every request, is re-read at session start and on `/new` or `/clear`, and cannot be made conditional | Yes | Password prompts (`sudo`, `su`, `ssh`) only in a foreground `pty: true` Bash call; never `sudo -S`; never put passwords in commands, environment, pipes, files or logs; stop when no PTY is available; reuse sudo credentials only via `sudo -v` inside the same PTY call; confirm destructive, permission/security, migration, external-interface, architecture and UI/UX decisions that tools cannot settle; prefer the `ask` tool with 2–5 options |
 
 **Why three files:** omp recommends `AGENTS.md` for durable background and `RULES.md` for a few hard requirements that must stay visible in long conversations. `APPEND_SYSTEM.md` layers preferences on top of the default prompt instead of replacing it, as `SYSTEM.md` would. Task subagents drop `AGENTS.md` and `APPEND_SYSTEM.md` but keep `RULES.md`, so the password and confirmation safety rules also bind delegated work.
 
-> The IDA Pro section of `AGENTS.md` still points to `skill://ida-pro-mcp`. That skill was removed in commit `2ad5d80`, and omp 18.14 lists no skill by that name.
-
 ## agent/config.yml
 
-The global settings layer. Project `.omp/config.yml` files, `--config` overlays and environment or CLI overrides sit above it; arrays in higher layers replace, not append. The file sets 69 keys: 40 change a built-in default and 29 restate one, pinning the behavior against upstream default changes.
+The global settings layer. Project `.omp/config.yml` files, `--config` overlays and environment or CLI overrides sit above it; arrays in higher layers replace, not append. The file sets 68 keys: 39 change a built-in default and 29 restate one, pinning the behavior against upstream default changes.
 
 ### Model roles (`modelRoles`)
 
@@ -275,7 +273,7 @@ Unset roles keep their built-in resolution: `memory` → `@tiny`, `widget` → l
 |---|---|---|---|---|
 | `defaultThinkingLevel` | `max` | `high` | Effort for thinking-capable models when a selector has no `:level` suffix | Quality first; every role above pins its own level anyway |
 | `providers.autoThinkingMaxEffort` | `max` | `xhigh` | Ceiling for `:auto` selectors (here `modelRoles.task`) | Lets the classifier spend `max` on turns it judges exceptional |
-| `modelProviderOrder` | `openai-codex`, `deepseek`, `ltcraft-aws-anthropic`, `ltcraft-kiro-anthropic`, `hajimi` | `[]` | Preferred provider when a bare model id exists under several providers | Bare ids such as `gpt-6.1-sol` resolve to the Codex gateway first, then DeepSeek. The last three providers were removed from `models.yml` in commit `5c83bf0` and currently match nothing |
+| `modelProviderOrder` | `openai-codex`, `deepseek` | `[]` | Preferred provider when a bare model id exists under several providers | Bare ids such as `gpt-6.1-sol` resolve to the Codex gateway first, then DeepSeek |
 | `retry.fallbackChains.web` | 28 candidates | `{}` | Ordered fallbacks when the `web` role fails or is unavailable: Perplexity; Gemini 2.5 Flash via three Google routes; Claude Haiku 4.5; GPT-5.6 Luna; Grok 4.5; 17 `web/*` search backends (Z.ai, TinyFish, Jina, Kagi, Tavily, Firecrawl, Brave, Kimi, Parallel, Synthetic, SearXNG, Startpage, DuckDuckGo, Ecosia, Google, Mojeek, public); GPT-5.6/GPT-5.5 via Codex; Grok via xAI OAuth; Ollama | Search degrades instead of failing: unavailable candidates, such as ones without credentials, are skipped. omp normalizes the legacy `openai-codex/gpt-5.6` and `openai-codex/gpt-5.5` entries to `openai-codex/gpt-5.6-sol` on load, leaving 27 effective candidates |
 
 ### Subagents
@@ -294,14 +292,13 @@ Unset roles keep their built-in resolution: `memory` → `@tiny`, `widget` → l
 | `task.softRequestBudgetNotice` | `true` | same | Sends that wrap-up notice | Pinned default |
 | `task.showResolvedModelBadge` | `true` | `false` | Shows each subagent's actual model in the task widget | Role aliases, prewalk hand-offs and fallbacks hide the real model otherwise |
 
-### Advisor and prewalk
+### Advisor
 
 | Key | Value | Default | Effect | Why |
 |---|---|---|---|---|
 | `advisor.enabled` | `true` | `false` | A second model (`advisor` role, GPT-6 Astra) reviews primary turns and injects notes | Independent review of the main model's work |
 | `advisor.syncBacklog` | `"3"` | `off` | Pauses the main agent, for at most 30 s, while 3 or more reviews are pending | Advice arrives while still relevant; the cap bounds the stall |
 | `tier.advisor` | `inherit` | `none` | The advisor uses the main agent's live per-family service tier | A `/fast` session gets an equally fast advisor |
-| `prewalk.auto` | `suggest` | `off` | Asks the `judge` role, per new task, whether a prewalk hand-off would pay off, and only reports the verdict | Observe the classifier before letting it switch models (`on`). Auto-prewalk only uses native judgment backends (TypeSafe Jev, OpenRouter, OpenAI Decisions, Workers AI Clef); with `judge` set to the chat model `deepseek-flash`, nothing is classified or reported |
 
 ### Context and memory
 
@@ -488,10 +485,9 @@ Load the directory via `chrome://extensions` → Developer mode → Load unpacke
 
 | Path | Description |
 |---|---|
-| `agent/mcp.json` | MCP servers: `blender` (`uvx --python 3.11 blender-mcp`, uv-managed Python only) and `boss-agent-cli` (local `boss-mcp` binary for BOSS Zhipin in the candidate role, 120 s timeout) |
-| `agent/mem0.yml` | Overlay that would switch memory to a self-hosted mem0 server. omp 18.14 accepts only `off`, `local`, `hindsight`, `mnemopi` and `sharpshooter` for `memory.backend`, so the file has no use with the current version |
+| `agent/mcp.json` | MCP servers: `blender` (`uvx --python 3.11 blender-mcp`, uv-managed Python only; needs `uv`) and `boss-agent-cli` (local `~/.local/bin/boss-mcp` binary for BOSS Zhipin in the candidate role, 120 s timeout). omp skips a server whose executable is missing |
 | `agent/.clawhub/lock.json` | ClawHub lock recording `easyeda-api` 1.1.3 from `yanranxiaoxi` |
-| `hindsight/compose.yaml` | Hindsight 0.9.2 (`ghcr.io/vectorize-io/hindsight`) as container `omp-hindsight`: ports 8888 and 9999 on `127.0.0.1`, LLM `gpt-5.4-mini` via the `cpa.studio26f.org` Responses endpoint (`STUDIO26F_API_KEY`), data in the `omp-hindsight-data` volume |
+| `hindsight/compose.yaml` | Hindsight 0.9.2 (`ghcr.io/vectorize-io/hindsight`) as container `omp-hindsight`: ports 8888 and 9999 on `127.0.0.1`, LLM `gpt-6-luna` via the gateway's Responses endpoint `cpa.studio26f.org:8443/v1` (`STUDIO26F_API_KEY`) for fact extraction and mental-model refresh, data in the `omp-hindsight-data` volume; restarts with the Docker daemon (`restart: unless-stopped`) |
 | `hindsight/migrate_mnemopi.py` | Fail-closed, resumable Mnemopi → Hindsight migration: `prepare`, `import --phase canary/all`, `verify`, `finalize`; tested by `test_migrate_mnemopi.py`. Run directories (`migrations/`) and `.env` are ignored |
 | `hindsight/mnemopi-rollback-config.yml` | Overlay restoring `memory.backend: mnemopi` (`omp --config hindsight/mnemopi-rollback-config.yml`) |
 | `openai-analysis.md` | Artificial Analysis Intelligence Index v4.1 data for GPT-5.6 Luna and Sol per effort level: cost per task, time per task, output speed, end-to-end latency |

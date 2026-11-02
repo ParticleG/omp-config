@@ -14,9 +14,9 @@ services:
       USER: hindsight
       LOGNAME: hindsight
       HINDSIGHT_API_LLM_PROVIDER: openai-responses
-      HINDSIGHT_API_LLM_BASE_URL: https://cpa.studio26f.org/v1
+      HINDSIGHT_API_LLM_BASE_URL: https://cpa.studio26f.org:8443/v1
       HINDSIGHT_API_LLM_API_KEY: ${STUDIO26F_API_KEY:?STUDIO26F_API_KEY is required}
-      HINDSIGHT_API_LLM_MODEL: gpt-5.4-mini
+      HINDSIGHT_API_LLM_MODEL: gpt-6-luna
       HINDSIGHT_API_FAIL_ON_EXTRACTION_ERRORS: "true"
       HINDSIGHT_API_STORE_DOCUMENT_TEXT: "true"
       HINDSIGHT_API_LLM_TRACE_ENABLED: "false"

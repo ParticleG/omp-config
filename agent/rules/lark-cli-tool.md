@@ -1,3 +1,7 @@
+---
+alwaysApply: true
+---
+
 # Lark CLI execution
 
 When any `lark-*` skill needs to run `lark-cli`, call the `lark_cli` custom tool.

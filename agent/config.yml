@@ -45,9 +45,6 @@ todo:
 modelProviderOrder:
   - openai-codex
   - deepseek
-  - ltcraft-aws-anthropic
-  - ltcraft-kiro-anthropic
-  - hajimi
 theme:
   dark: titanium
   light: light
@@ -150,5 +147,3 @@ tui:
   mouse: true
 tier:
   advisor: inherit
-prewalk:
-  auto: suggest
