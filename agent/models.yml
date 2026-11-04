@@ -105,3 +105,30 @@ providers:
         input: [text]
         contextWindow: 1000000
         maxTokens: 131072
+  supranett:
+    baseUrl: https://llm.dev-supranett.space/v1
+    auth: apiKey
+    apiKey: 'sk-placeholder'
+    api: openai-responses
+    models:
+      - id: deepseek-v4.1-flash
+        name: DeepSeek V4.1 Flash Local
+        # Gateway ID; DeepSeek now recommends deepseek-flash instead of deepseek-v4.1-flash.
+        # Official reference limits and capabilities; gateway routing and limits are unverified.
+        # https://api-docs.deepseek.com/quick_start/agent_integrations/codex
+        # https://api-docs.deepseek.com/api/create-chat-completion
+        # https://api-docs.deepseek.com/guides/thinking_mode
+        reasoning: true
+        thinking:
+          mode: effort
+          efforts: [low, high, max]
+          defaultLevel: high
+          requiresEffort: false
+        supportsTools: true
+        input: [text, image]
+        contextWindow: 1048576
+        maxTokens: 393216
+        compat:
+          statefulResponses: false
+          supportsReasoningSummary: false
+          supportsImageDetailOriginal: true
