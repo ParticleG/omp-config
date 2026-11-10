@@ -4,7 +4,7 @@ modelRoles:
   default: claude-opus-5-5:high
   plan: claude-opus-5-5:xhigh
   slow: claude-opus-5-5:max
-  smol: deepseek-flash:max
+  smol: cpa-studio26f/deepseek-flash:max
   task: claude-opus-5-5:auto
   tiny: "@smol"
   vision: gpt-6.1-sol:max
@@ -63,7 +63,7 @@ display:
 autoResume: false
 startup:
   checkUpdate: false
-setupVersion: 2
+setupVersion: 3
 memory:
   backend: hindsight
 checkpoint:
@@ -164,3 +164,5 @@ modelPresets:
       web: web/exa
       judge: deepseek-flash:max
     defaultThinkingLevel: xhigh
+update:
+  auto: false

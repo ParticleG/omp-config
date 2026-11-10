@@ -1,14 +1,24 @@
 # -*- coding: utf-8 -*-
-"""scripts/abtest.py —— 全量规则在52片段朱雀语料上的A/B验证，回写 status 到规则库。
+"""scripts/abtest.py —— 全量规则在朱雀标签语料上的A/B验证。
 判定：confirmed（CI不含0且|d|≥0.10）/ reversed（人味方向过CI）/ no_signal / insufficient（触发<5）。
-meta与豁免规则不参与。结果存 validation/results/abtest_results.json 并更新 rules/*.json。"""
-import os, re, io, json, sys
+meta与豁免规则不参与。默认只打印新旧 status 对比；加 --write 才回写 rules/*.json 与 validation/results/abtest_results.json。
+语料太小时大部分规则会变成 insufficient，Z分随之失效：作者用的是 52 个 >200 字的片段。回写前先备份 rules/。"""
+import os, re, io, json, sys, argparse
+from collections import Counter
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from scanner import load_rules, kilo
 
-corpus = [c for c in json.load(io.open(os.path.join(HERE, 'validation', 'corpus', 'zhuque_corpus.json'), encoding='utf-8')) if c['text'] and len(c['text']) > 200]
+ap = argparse.ArgumentParser(description='anti-ai-foolish 规则 A/B 重验')
+ap.add_argument('--write', action='store_true', help='把新 status 写回 rules/*.json（会覆盖现有校准）')
+args = ap.parse_args()
+
+CORPUS = os.path.join(HERE, 'validation', 'corpus', 'zhuque_corpus.json')
+if not os.path.isfile(CORPUS):
+    raise SystemExit(f'缺少语料 {CORPUS}\n作者未随包发布 52 片段语料（被 .gitignore 排除）。'
+                     '请自备朱雀标签语料：JSON 数组，每项 {"text": 片段原文, "aigc": 朱雀AIGC值0–1}。')
+corpus = [c for c in json.load(io.open(CORPUS, encoding='utf-8')) if c['text'] and len(c['text']) > 200]
 N = len(corpus); aigc = [c['aigc'] for c in corpus]; texts = [c['text'] for c in corpus]
 
 def stats(fired):
@@ -56,7 +66,28 @@ for r in rules:
     results[r['id']] = {'status': status, 'n': n1, 'm1': round(m1, 3), 'm0': round(m0, 3),
                         'diff': round(diff, 3), 'ci': [round(lo, 3), round(hi, 3)], 'r': round(corr, 2)}
 
-# 回写规则库
+old = {r['id']: r.get('status', 'untested') for r in rules if r['id'] in results}
+changed_ids = [rid for rid, v in results.items() if v['status'] != 'regex_error' and v['status'] != old[rid]]
+print(f'验证规则 {len(results)} 条 | 片段 {N}（作者原语料 52 片段）')
+print('原 status:', dict(Counter(old.values())))
+print('新 status:', dict(Counter(v['status'] for v in results.values())))
+print('Z分所用规则（原 confirmed AI / reversed 人味）的新状态:',
+      dict(Counter(results[r['id']]['status'] for r in rules if r['id'] in results
+                   and ((r['direction'] == 'AI' and old[r['id']] == 'confirmed') or (r['direction'] == '人味' and old[r['id']] == 'reversed')))))
+print(f'将改变 status 的规则: {len(changed_ids)} 条')
+print('\n== confirmed（AI信号）TOP15 ==')
+for rid, v in sorted(results.items(), key=lambda kv: -kv[1].get('diff', 0))[:15]:
+    if v['status'] == 'confirmed':
+        print(f"  {rid:<16} n={v['n']:>2} diff={v['diff']:+.3f} CI{v['ci']} r={v['r']:+.2f}")
+print('\n== reversed（人味信号）TOP15 ==')
+for rid, v in sorted(results.items(), key=lambda kv: kv[1].get('diff', 0))[:15]:
+    if v['status'] == 'reversed':
+        print(f"  {rid:<16} n={v['n']:>2} diff={v['diff']:+.3f} CI{v['ci']} r={v['r']:+.2f}")
+
+if not args.write:
+    print('\n[试运行] 未写入。确认新旧对比可接受、已备份 rules/ 后，加 --write 回写。')
+    sys.exit(0)
+
 import glob
 for f in glob.glob(os.path.join(HERE, 'rules', 'R_*.json')):
     rs = json.load(io.open(f, encoding='utf-8'))
@@ -71,17 +102,5 @@ for f in glob.glob(os.path.join(HERE, 'rules', 'R_*.json')):
             changed = True
     if changed:
         io.open(f, 'w', encoding='utf-8').write(json.dumps(rs, ensure_ascii=False, indent=1))
-
-from collections import Counter
-cnt = Counter(v['status'] for v in results.values())
 io.open(os.path.join(HERE, 'validation', 'results', 'abtest_results.json'), 'w', encoding='utf-8').write(json.dumps(results, ensure_ascii=False, indent=1))
-print(f'验证规则 {len(results)} 条 | 片段 {N}')
-print(dict(cnt))
-print('\n== confirmed（AI信号）TOP15 ==')
-for rid, v in sorted(results.items(), key=lambda kv: -kv[1].get('diff', 0))[:15]:
-    if v['status'] == 'confirmed':
-        print(f"  {rid:<16} n={v['n']:>2} diff={v['diff']:+.3f} CI{v['ci']} r={v['r']:+.2f}")
-print('\n== reversed（人味信号）TOP15 ==')
-for rid, v in sorted(results.items(), key=lambda kv: kv[1].get('diff', 0))[:15]:
-    if v['status'] == 'reversed':
-        print(f"  {rid:<16} n={v['n']:>2} diff={v['diff']:+.3f} CI{v['ci']} r={v['r']:+.2f}")
+print('\n[已写入] rules/*.json 与 validation/results/abtest_results.json')
