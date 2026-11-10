@@ -10,7 +10,7 @@ modelRoles:
   vision: gpt-6.1-sol:max
   web: web/exa
   judge: deepseek-flash:max
-defaultThinkingLevel: max
+defaultThinkingLevel: xhigh
 compaction:
   enabled: true
   methodOrder:
