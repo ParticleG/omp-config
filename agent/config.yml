@@ -1,11 +1,11 @@
 modelRoles:
-  advisor: claude-opus-5-5:xhigh
-  commit: claude-opus-5-5:medium
-  default: claude-opus-5-5:high
-  plan: claude-opus-5-5:xhigh
-  slow: claude-opus-5-5:max
+  advisor: claude-fable-5-2:high
+  commit: claude-fable-5-2:medium
+  default: claude-fable-5-2:medium
+  plan: claude-fable-5-2:high
+  slow: claude-fable-5-2:high
   smol: cpa-studio26f/deepseek-flash:max
-  task: claude-opus-5-5:auto
+  task: claude-opus-5-5:xhigh
   tiny: "@smol"
   vision: gpt-6.1-sol:max
   web: web/exa
