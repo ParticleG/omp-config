@@ -150,7 +150,20 @@ tui:
 tier:
   advisor: inherit
 modelPresets:
-  claude-first:
+  claude-best:
+    modelRoles:
+      advisor: claude-fable-5-2:high
+      commit: claude-fable-5-2:medium
+      default: claude-fable-5-2:medium
+      plan: claude-fable-5-2:high
+      slow: claude-fable-5-2:high
+      smol: cpa-studio26f/deepseek-flash:max
+      task: claude-opus-5-5:xhigh
+      tiny: "@smol"
+      vision: gpt-6.1-sol:max
+      web: web/exa
+      judge: deepseek-flash:max
+  claude-normal:
     modelRoles:
       advisor: claude-opus-5-5:xhigh
       commit: claude-opus-5-5:medium
@@ -161,6 +174,20 @@ modelPresets:
       task: claude-opus-5-5:auto
       tiny: "@smol"
       vision: gpt-6.1-sol:max
+      web: web/exa
+      judge: deepseek-flash:max
+    defaultThinkingLevel: xhigh
+  gpt-best:
+    modelRoles:
+      advisor: gpt-6-astra:max
+      commit: gpt-6.1-sol:xhigh
+      default: gpt-6.1-sol:max
+      plan: gpt-6-astra:xhigh
+      slow: gpt-6-astra:max
+      smol: deepseek-flash:max
+      task: gpt-6.1-sol:auto
+      tiny: "@smol"
+      vision: gpt-6.1-sol:xhigh
       web: web/exa
       judge: deepseek-flash:max
     defaultThinkingLevel: xhigh
