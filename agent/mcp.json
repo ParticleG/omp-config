@@ -11,6 +11,12 @@
       "command": "/home/particleg/.local/bin/boss-mcp",
       "args": ["--platform", "zhipin", "--role", "candidate"],
       "timeout": 120000
+    },
+    "himalaya": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["/home/particleg/.local/share/himalaya-mcp/himalaya-mcp-plugin/dist/index.js"],
+      "timeout": 60000
     }
   }
 }

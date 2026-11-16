@@ -1,0 +1,31 @@
+{
+  "sources": [
+    {
+      "id": "studio26f",
+      "type": "keeper",
+      "baseUrl": "https://cpa.studio26f.org:8443/keeper",
+      "passwordEnv": "STUDIO26F_CPA_KEEPER_PASSWORD",
+      "providers": ["codex"],
+      "refresh": false
+    },
+    {
+      "id": "a-minos",
+      "type": "keeper",
+      "baseUrl": "https://cpa.a-minos.org/keeper",
+      "passwordEnv": "AMINOS_CPA_KEEPER_PASSWORD",
+      "refresh": false
+    }
+  ],
+  "modelMappings": [
+    {
+      "provider": "openai-codex",
+      "source": "studio26f",
+      "quotaProvider": "codex"
+    },
+    {
+      "provider": "antigravity",
+      "source": "a-minos",
+      "quotaProvider": "antigravity"
+    }
+  ]
+}

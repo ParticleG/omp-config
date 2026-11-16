@@ -11,6 +11,7 @@
 /agent/kimi-device-id
 /agent/last-changelog-version
 /agent/secret-placeholder.key
+/plugins/installed_plugins.json
 
 /agent/blobs/
 /agent/cache/
@@ -29,10 +30,12 @@
 /natives/
 /node_modules/
 /plugins/cache/marketplaces/
+/plugins/cache/plugins/
 /plugins/node_modules/
 /puppeteer/chrome/
 /remote-host/
 /run/collab-hosts/
 /run/daemons/
+/security/
 /webcache/
 /wt/

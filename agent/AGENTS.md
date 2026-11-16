@@ -12,5 +12,6 @@
 | `DataGripProjects/` | PostgreSQL, MySQL, SQLite |
 | `OfficeAddinProjects/` | TypeScript, React 18, Office.js, Fluent UI |
 | `WritersideProjects/` | JetBrains Writerside 技术文档 |
+| `26FStudioProjects/` | 26F Studio / Techmino 在线重写：Tessera（Bun/Elysia/Better Auth）、Cadence（Rust/Axum）、26f-studio 网站（Vue 3/Quasar）、Techmino 与 Techmino_Galaxy 客户端（LÖVE/Lua）及实施计划文档 |
 
 查找项目时：忽略大小写和分隔符差异，支持部分匹配，根据技术栈关键词优先在对应子目录查找。多项目匹配时询问用户。
