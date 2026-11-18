@@ -10,17 +10,17 @@
       "enabledFeatures": null,
       "enabled": true
     },
-    "omp-openai-codex-endpoint": {
-      "version": "1.0.0",
-      "enabledFeatures": null,
-      "enabled": true
-    },
     "omp-session-board": {
       "version": "0.1.0",
       "enabledFeatures": null,
       "enabled": true
     },
     "omp-usage": {
+      "enabledFeatures": null,
+      "enabled": true
+    },
+    "omp-openai-codex-endpoint": {
+      "version": "1.0.1",
       "enabledFeatures": null,
       "enabled": true
     }

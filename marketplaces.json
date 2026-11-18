@@ -7,7 +7,7 @@
       "sourceUri": "anthropics/claude-plugins-official",
       "catalogPath": "/home/particleg/.omp/plugins/cache/marketplaces/claude-plugins-official/marketplace.json",
       "addedAt": "2026-07-08T07:24:52.500Z",
-      "updatedAt": "2026-11-16T12:01:14.937Z"
+      "updatedAt": "2026-11-18T02:07:16.864Z"
     },
     {
       "name": "omp-extensions-233",
@@ -15,7 +15,7 @@
       "sourceUri": "233Official/omp-extensions",
       "catalogPath": "/home/particleg/.omp/plugins/cache/marketplaces/omp-extensions-233/marketplace.json",
       "addedAt": "2026-11-16T09:47:33.555Z",
-      "updatedAt": "2026-11-16T09:47:33.555Z"
+      "updatedAt": "2026-11-18T02:07:18.141Z"
     }
   ]
 }
