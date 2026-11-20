@@ -180,3 +180,5 @@ modelPresets:
     defaultThinkingLevel: xhigh
 update:
   auto: false
+disassembler:
+  backend: ghidra
