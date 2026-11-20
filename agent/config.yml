@@ -25,6 +25,9 @@ task:
   softRequestBudgetNotice: true
   agentAdvisor:
     task: "on"
+  agentModelOverrides:
+    sonic: gpt-6.2-sol:auto
+    task: gpt-6.2-astra:xhigh
   prewalk: false
   isolation:
     enabled: true

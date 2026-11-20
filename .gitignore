@@ -18,6 +18,7 @@
 /agent/cache/
 /agent/custom-session-files/
 /agent/ghidra-projects/
+/agent/hindsight-outbox/
 /agent/keysmith/
 /agent/memories/
 /agent/predict/ngram/
@@ -40,6 +41,7 @@
 /run/collab-hosts/
 /run/daemon/
 /run/daemons/
+/run/session-owners/
 /security/
 /webcache/
 /wt/
