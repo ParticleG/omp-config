@@ -8,6 +8,7 @@
 /agent/*.db
 /agent/*.db-shm
 /agent/*.db-wal
+/agent/codex-client-version.json
 /agent/kimi-device-id
 /agent/last-changelog-version
 /agent/secret-placeholder.key
@@ -16,6 +17,7 @@
 /agent/blobs/
 /agent/cache/
 /agent/custom-session-files/
+/agent/ghidra-projects/
 /agent/keysmith/
 /agent/memories/
 /agent/predict/ngram/
@@ -26,6 +28,7 @@
 /autoresearch/
 /browser-profiles/
 /cache/
+/ghidra/
 /logs/
 /natives/
 /node_modules/
@@ -35,6 +38,7 @@
 /puppeteer/chrome/
 /remote-host/
 /run/collab-hosts/
+/run/daemon/
 /run/daemons/
 /security/
 /webcache/

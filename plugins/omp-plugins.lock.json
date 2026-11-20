@@ -18,11 +18,6 @@
     "omp-usage": {
       "enabledFeatures": null,
       "enabled": true
-    },
-    "omp-openai-codex-endpoint": {
-      "version": "1.0.1",
-      "enabledFeatures": null,
-      "enabled": true
     }
   },
   "settings": {}
