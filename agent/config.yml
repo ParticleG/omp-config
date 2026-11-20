@@ -1,11 +1,11 @@
 modelRoles:
-  advisor: gpt-6.2-astra:xhigh
-  commit: gpt-6.2-sol:high
-  default: gpt-6.2-sol:xhigh
-  plan: gpt-6.2-astra:xhigh
-  slow: gpt-6.2-astra:xhigh
+  advisor: claude-fable-5-2:high
+  commit: claude-opus-5-5:high
+  default: claude-opus-5-5:xhigh
+  plan: claude-fable-5-2:high
+  slow: claude-fable-5-2:high
   smol: deepseek-flash:max
-  task: gpt-6.2-sol:auto
+  task: claude-opus-5-5:auto
   tiny: "@smol"
   vision: gpt-6.2-sol:medium
   web: web/exa
