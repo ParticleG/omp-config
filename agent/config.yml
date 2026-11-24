@@ -1,16 +1,16 @@
 modelRoles:
-  advisor: claude-fable-5-2:high
-  commit: claude-opus-5-5:high
-  default: claude-opus-5-5:xhigh
+  advisor: claude-opus-5-5:xhigh
+  commit: claude-opus-5-5:medium
+  default: claude-fable-5-2:medium
   plan: claude-fable-5-2:high
-  slow: claude-fable-5-2:high
+  slow: claude-opus-5-5:xhigh
   smol: deepseek-flash:max
   task: claude-opus-5-5:auto
   tiny: "@smol"
-  vision: gpt-6.2-sol:medium
+  vision: deepseek-flash:max
   web: web/exa
-  judge: gpt-6.2-sol:medium
-defaultThinkingLevel: xhigh
+  judge: deepseek-flash:max
+defaultThinkingLevel: high
 compaction:
   enabled: true
   methodOrder:
@@ -114,12 +114,6 @@ retry:
   fallbackChains:
     web:
       - web/perplexity
-      - google-gemini-cli/gemini-2.5-flash
-      - google-antigravity/gemini-2.5-flash
-      - google/gemini-2.5-flash
-      - anthropic/claude-haiku-4-5
-      - openai-codex/gpt-5.6-luna
-      - xai/grok-4.5
       - web/zai
       - web/tinyfish
       - web/jina
@@ -137,9 +131,6 @@ retry:
       - web/google
       - web/mojeek
       - web/public
-      - openai-codex/gpt-6.1-sol
-      - xai-oauth/grok-4.5
-      - web/ollama
 collab:
   autoStart: "off"
 security:
@@ -156,17 +147,31 @@ modelPresets:
   claude-best:
     modelRoles:
       advisor: claude-fable-5-2:high
-      commit: claude-opus-5-5:high
+      commit: claude-fable-5-2:low
       default: claude-opus-5-5:xhigh
-      plan: claude-fable-5-2:high
-      slow: claude-fable-5-2:high
+      plan: claude-fable-5-2:xhigh
+      slow: claude-fable-5-2:xhigh
       smol: deepseek-flash:max
-      task: claude-opus-5-5:auto
+      task: claude-fable-5-2:auto
       tiny: "@smol"
       vision: gpt-6.2-sol:medium
       web: web/exa
       judge: gpt-6.2-sol:medium
     defaultThinkingLevel: xhigh
+  claude-budget:
+    modelRoles:
+      advisor: claude-opus-5-5:xhigh
+      commit: claude-opus-5-5:medium
+      default: claude-fable-5-2:medium
+      plan: claude-fable-5-2:high
+      slow: claude-opus-5-5:xhigh
+      smol: deepseek-flash:max
+      task: claude-opus-5-5:auto
+      tiny: "@smol"
+      vision: deepseek-flash:max
+      web: web/exa
+      judge: deepseek-flash:max
+    defaultThinkingLevel: high
   gpt-best:
     modelRoles:
       advisor: gpt-6.2-astra:xhigh
@@ -185,3 +190,5 @@ update:
   auto: false
 disassembler:
   backend: ghidra
+spelling:
+  autocomplete: auto
