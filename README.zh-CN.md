@@ -406,7 +406,7 @@ providers:
 | `anthropic` | 覆盖内置 provider | `cpa.a-minos.org` 网关 | `anthropic-messages` | `AMINOS_API_KEY`，以 Bearer 发送 | 内置 Anthropic 目录 |
 | `antigravity` | 自定义 provider | `cpa.a-minos.org/v1beta` | `google-generative-ai` | `AMINOS_API_KEY`，以 Bearer 发送 | `claude-sonnet-5-5-high`、`claude-opus-5-5-high`、`gemini-4-argon-high`、`gemini-3.8-flash-high`、`gemini-3.5-flash-lite`、`gemini-3.1-flash-lite`、`gemini-3-flash`、`gpt-oss-120b-medium`，以及图像模型 `gemini-3.1-flash-image`（`kind: image`） |
 | `openai-codex` | 覆盖内置 provider | `cpa.studio26f.org:8443/backend-api` | 内置（`openai-codex-responses`） | `STUDIO26F_API_KEY` | 内置 Codex 目录：`gpt-6.1-sol`、`gpt-6-astra` 等，供 `default`、`task`、`plan`、`slow`、`advisor`、`commit`、`vision` 角色使用 |
-| `cpa-studio26f` | 自定义 provider | `cpa.studio26f.org:8443/v1` | `openai-responses` | `STUDIO26F_API_KEY` | 五个模型，见下表 |
+| `cpa-studio26f` | 自定义 provider | `cpa.studio26f.org:8443/v1` | `openai-responses` | `STUDIO26F_API_KEY` | 六个模型，见下表 |
 
 `antigravity` 有意使用独立的 provider id。正如文件中的注释所说，这样可以把网关的 CLIProxyAPI 模型 id 与 omp 原生的 `google-antigravity` OAuth 路由区分开。它的条目只写了 `id`，元数据由 omp 从内置参考模型补全。
 
@@ -419,6 +419,7 @@ providers:
 | `Agents-A1` | Agents A1 | 文本、图像 | 256,000 | 128,000 | low、medium、high | 必须指定档位 |
 | `deepseek-v4-flash-vision` | DeepSeek V4 Flash Vision | 文本、图像 | 1,048,576 | 393,216 | low、high、max（默认 high） | 可关闭推理；`compat`：`statefulResponses: false`（以 `store: false` 重放完整上下文，而不是用 `previous_response_id` 串联）、`supportsReasoningSummary: false`（不发送 `reasoning.summary`）、`supportsImageDetailOriginal: true`（允许 `detail: "original"` 图像） |
 | `glm-5.3` | GLM-5.3 | 文本 | 1,000,000 | 131,072 | low、high、max（默认 max） | 必须指定档位 |
+| `kimi-k3.1-pro` | Kimi K3.1 Pro | 文本、图像 | 1,048,576 | 131,072 | low、high、max（默认 max） | 必须指定档位；元数据参照内置 `moonshot` 条目；`compat`：`statefulResponses: false`（网关不保留 `previous_response_id` 历史，改为重放完整上下文） |
 
 多个条目的注释引用了厂商官方文档中的限制，并注明网关行为未经验证。
 

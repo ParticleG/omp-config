@@ -406,7 +406,7 @@ A provider without `models` is an override: it reroutes or re-authenticates the 
 | `anthropic` | Override of the built-in provider | `cpa.a-minos.org` gateway | `anthropic-messages` | `AMINOS_API_KEY`, sent as Bearer | Built-in Anthropic catalog |
 | `antigravity` | Custom provider | `cpa.a-minos.org/v1beta` | `google-generative-ai` | `AMINOS_API_KEY`, sent as Bearer | `claude-sonnet-5-5-high`, `claude-opus-5-5-high`, `gemini-4-argon-high`, `gemini-3.8-flash-high`, `gemini-3.5-flash-lite`, `gemini-3.1-flash-lite`, `gemini-3-flash`, `gpt-oss-120b-medium`, and the image model `gemini-3.1-flash-image` (`kind: image`) |
 | `openai-codex` | Override of the built-in provider | `cpa.studio26f.org:8443/backend-api` | Built-in (`openai-codex-responses`) | `STUDIO26F_API_KEY` | Built-in Codex catalog: `gpt-6.1-sol`, `gpt-6-astra` and others, used by the `default`, `task`, `plan`, `slow`, `advisor`, `commit` and `vision` roles |
-| `cpa-studio26f` | Custom provider | `cpa.studio26f.org:8443/v1` | `openai-responses` | `STUDIO26F_API_KEY` | Five models, see below |
+| `cpa-studio26f` | Custom provider | `cpa.studio26f.org:8443/v1` | `openai-responses` | `STUDIO26F_API_KEY` | Six models, see below |
 
 `antigravity` deliberately uses its own provider id. As the file's comment says, it keeps the gateway's CLIProxyAPI model ids separate from omp's native `google-antigravity` OAuth routes. Its entries list only `id`, so omp fills their metadata from bundled references.
 
@@ -419,6 +419,7 @@ A provider without `models` is an override: it reroutes or re-authenticates the 
 | `Agents-A1` | Agents A1 | text, image | 256,000 | 128,000 | low, medium, high | Effort required |
 | `deepseek-v4-flash-vision` | DeepSeek V4 Flash Vision | text, image | 1,048,576 | 393,216 | low, high, max (default high) | Reasoning may be turned off; `compat`: `statefulResponses: false` (replay full context with `store: false` instead of `previous_response_id` chaining), `supportsReasoningSummary: false` (no `reasoning.summary`), `supportsImageDetailOriginal: true` (allow `detail: "original"` images) |
 | `glm-5.3` | GLM-5.3 | text | 1,000,000 | 131,072 | low, high, max (default max) | Effort required |
+| `kimi-k3.1-pro` | Kimi K3.1 Pro | text, image | 1,048,576 | 131,072 | low, high, max (default max) | Effort required; metadata mirrors the bundled `moonshot` entry; `compat`: `statefulResponses: false` (the gateway does not retain `previous_response_id` history, so full context is replayed) |
 
 Comments on several entries cite the vendors' official documentation for these limits and note that the gateway's behavior is unverified.
 
