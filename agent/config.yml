@@ -7,9 +7,9 @@ modelRoles:
   smol: deepseek-flash:max
   task: claude-opus-5-5:auto
   tiny: "@smol"
-  vision: deepseek-flash:max
+  vision: kimi-k3.1-pro:max
   web: web/exa
-  judge: deepseek-flash:max
+  judge: kimi-k3.1-pro:max
 defaultThinkingLevel: high
 compaction:
   enabled: true
@@ -154,9 +154,9 @@ modelPresets:
       smol: deepseek-flash:max
       task: claude-fable-5-2:auto
       tiny: "@smol"
-      vision: gpt-6.2-sol:medium
+      vision: kimi-k3.1-pro:max
       web: web/exa
-      judge: gpt-6.2-sol:medium
+      judge: kimi-k3.1-pro:max
     defaultThinkingLevel: xhigh
   claude-budget:
     modelRoles:
@@ -168,9 +168,9 @@ modelPresets:
       smol: deepseek-flash:max
       task: claude-opus-5-5:auto
       tiny: "@smol"
-      vision: deepseek-flash:max
+      vision: kimi-k3.1-pro:max
       web: web/exa
-      judge: deepseek-flash:max
+      judge: kimi-k3.1-pro:max
     defaultThinkingLevel: high
   gpt-best:
     modelRoles:
@@ -182,9 +182,9 @@ modelPresets:
       smol: deepseek-flash:max
       task: gpt-6.2-sol:auto
       tiny: "@smol"
-      vision: gpt-6.2-sol:medium
+      vision: kimi-k3.1-pro:max
       web: web/exa
-      judge: gpt-6.2-sol:medium
+      judge: kimi-k3.1-pro:max
     defaultThinkingLevel: xhigh
 update:
   auto: false
